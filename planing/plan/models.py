@@ -2,9 +2,48 @@ from django.db import models
 import math
 
 
+class country(models.Model):
+    name = models.CharField('Country Name', max_length=100)
+    iso3 = models.CharField('IOS3', max_length=10, null=True, blank=True)
+    phoneCode = models.CharField('Phone Code', max_length=10, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = '0_Country'
+
+
+class province(models.Model):
+    name = models.CharField('Province Name', max_length=100)
+    phoneCode = models.CharField('Phone Code', max_length=10, null=True, blank=True)
+    country = models.ForeignKey(country, null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = '1_Province'
+
+
+class city(models.Model):
+    name = models.CharField('City Name', max_length=100)
+    phoneCode = models.CharField('Phone Code', max_length=10, null=True, blank=True)
+    latt = models.DecimalField('Latitude', null=True, blank=True, max_digits=9, decimal_places=6)
+    long = models.DecimalField('Longitude', null=True, blank=True, max_digits=9, decimal_places=6)
+    province = models.ForeignKey(province, null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = '2_City'
+
+
 class attractions(models.Model):
-    country = models.CharField('Country', max_length=100)
-    iso3 = models.CharField('iso3', max_length=10)
+    country = models.ForeignKey(country, on_delete=models.CASCADE, null=True, blank=True)
+    province = models.ForeignKey(province, on_delete=models.CASCADE, null=True, blank=True)
+    city = models.ForeignKey(city, on_delete=models.CASCADE, null=True, blank=True)
     phoneCode = models.CharField('Phone Code', max_length=10)
     title = models.CharField('Title', max_length=5000)
     fullTitle = models.CharField('Full Title', max_length=5000, null=True, blank=True)
@@ -17,9 +56,6 @@ class attractions(models.Model):
     vis_time = models.CharField('Visit Time Range', max_length=50, null=True, blank=True)
     vis_time_from = models.IntegerField('Visit Time From', null=True, blank=True)
     vis_time_to = models.IntegerField('Visit Time To', null=True, blank=True)
-    province = models.CharField('Provice', max_length=100, null=True, blank=True)
-    city = models.CharField('City', max_length=100, null=True, blank=True)
-
     image = models.URLField('Image', null=True, blank=True)
 
     def __str__(self):
@@ -30,7 +66,7 @@ class attractions(models.Model):
     #         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = 'Attractions'
+        verbose_name_plural = '3_Attractions'
         ordering = ('latt', 'long')
         # unique_together = ["details"]
 
@@ -44,7 +80,7 @@ class travelType(models.Model):
         return self.title
 
     class Meta:
-        verbose_name_plural = 'Travel Types'
+        verbose_name_plural = '4_Travel Types'
 
 
 class distance_mat(models.Model):
@@ -59,7 +95,7 @@ class distance_mat(models.Model):
         return self.origin.title + ' - ' + self.destination.title
 
     class Meta:
-        verbose_name_plural = 'Distance matrix'
+        verbose_name_plural = '6_Distance matrix'
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -94,6 +130,6 @@ class distance_mat(models.Model):
         dst_latt = self.destination.latt
         dst_long = self.destination.long
 
-        ecl_dist = math.sqrt(((dst_latt-ogn_latt)**2) + ((dst_long-ogn_long)**2))
+        ecl_dist = math.sqrt(((dst_latt - ogn_latt) ** 2) + ((dst_long - ogn_long) ** 2))
         self.ecl_dist = ecl_dist
         super(distance_mat, self).save(*args, **kwargs)

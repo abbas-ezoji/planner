@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="ADD: plan APP">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0004_auto_20200316_1710.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0005_auto_20200316_1738.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0006_auto_20200316_1752.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0007_auto_20200316_1823.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0008_auto_20200316_1825.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0009_auto_20200316_1829.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0010_auto_20200316_1848.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0011_auto_20200316_1852.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0012_auto_20200316_1902.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/plan.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/plan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/attractions2.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/dist_mat.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +72,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584134117897</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ADD: plan APP">
+      <created>1584135133668</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1584135133668</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -72,10 +91,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="ADD: plan APP" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="335" y="0" key="CommitChangelistDialog2" timestamp="1584134191323">
+    <state x="335" y="0" key="CommitChangelistDialog2" timestamp="1584135132483">
       <screen x="0" y="0" width="1364" height="728" />
     </state>
-    <state x="335" y="0" key="CommitChangelistDialog2/0.0.1364.728@0.0.1364.728" timestamp="1584134191323" />
+    <state x="335" y="0" key="CommitChangelistDialog2/0.0.1364.728@0.0.1364.728" timestamp="1584135132483" />
     <state x="460" y="117" key="FileChooserDialogImpl" timestamp="1583763326192">
       <screen x="0" y="0" width="1364" height="728" />
     </state>
@@ -84,14 +103,14 @@
       <screen x="0" y="0" width="1364" height="728" />
     </state>
     <state x="182" y="5" key="SettingsEditor/0.0.1364.728@0.0.1364.728" timestamp="1584134044937" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1584134122731">
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1584135139549">
       <screen x="0" y="0" width="1364" height="728" />
     </state>
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1364.728@0.0.1364.728" timestamp="1584134122731" />
-    <state x="376" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1584100430002">
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1364.728@0.0.1364.728" timestamp="1584135139549" />
+    <state x="376" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1584365186713">
       <screen x="0" y="0" width="1364" height="728" />
     </state>
-    <state x="376" y="186" key="com.intellij.ide.util.TipDialog/0.0.1364.728@0.0.1364.728" timestamp="1584100430002" />
+    <state x="376" y="186" key="com.intellij.ide.util.TipDialog/0.0.1364.728@0.0.1364.728" timestamp="1584365186713" />
     <state x="338" y="17" width="672" height="676" key="search.everywhere.popup" timestamp="1583669692493">
       <screen x="0" y="0" width="1364" height="728" />
     </state>
