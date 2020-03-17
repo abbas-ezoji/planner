@@ -46,8 +46,8 @@ class planAdmin(admin.ModelAdmin):
 
 class plan_detailsAdmin(admin.ModelAdmin):
     # pass
-    list_display = ('plan', 'order', 'point', 'len_time')
-    list_filter = ('plan__city__name', 'point__title')
+    list_display = ('point', 'order', 'len_time', 'plan', )
+    list_filter = ('plan__city__name', 'point__title', 'plan__present_id')
 
 
 admin.site.register(plan, planAdmin)

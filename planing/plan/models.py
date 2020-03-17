@@ -87,7 +87,7 @@ class distance_mat(models.Model):
     origin = models.ForeignKey(attractions, related_name='distance_mat', on_delete=models.CASCADE)
     destination = models.ForeignKey(attractions, related_name='destination', on_delete=models.CASCADE)
     travel_type = models.ForeignKey(travelType, on_delete=models.CASCADE)
-    ecl_dist = models.DecimalField('Euclidean Distance', null=True, blank=True, max_digits=9, decimal_places=6)
+    ecl_dist = models.FloatField('Euclidean Distance', null=True, blank=True,)
     len_meter = models.FloatField('Lenght Of Meters', null=True, blank=True)
     len_time = models.FloatField('Lenght Of Time', null=True, blank=True)
 

@@ -9,28 +9,28 @@ import uuid
 
 
 ##############################
-city = 24 #  'استانبول'
+city = 36 #  'استانبول'
 start_time = 480
 end_time = 1260
 
-coh_fultm = 0.8
-coh_lntm  = 0.0
+coh_fultm = 0.4
+coh_lntm  = 0.4
 coh_cnt   = 0.2
 coh_dffRqTime  = 0.0
 ##############################
-
 USER = 'planuser'
 PASSWORD = '1qaz!QAZ'
 HOST = 'localhost'
 PORT = '5432'
-NAME = 'planing'
+NAME = 'planning'
 db_connection = "postgresql://{}:{}@{}:{}/{}".format(USER,
-                                                         PASSWORD,
-                                                         HOST,
-                                                         PORT,
-                                                         NAME
+                                                     PASSWORD,
+                                                     HOST,
+                                                     PORT,
+                                                     NAME
                                                         )
 engine = create_engine(db_connection)
+
 df = pd.read_sql_query('SELECT * FROM	plan_attractions',con=engine)
 df = df.drop(['image'], axis=1)
 
