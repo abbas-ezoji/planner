@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0002_auto_20200317_1535.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0003_plan_present_id.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0004_auto_20200317_1614.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0005_auto_20200317_1623.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0006_auto_20200317_1630.py" afterDir="false" />
+    <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="ADD: plan APP">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/ga_numpy.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/ga_numpy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/plan.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/plan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/planing/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/planing/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +25,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/planing/scrapy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
@@ -86,10 +78,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="ADD: plan APP" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="335" y="0" key="CommitChangelistDialog2" timestamp="1584135132483">
-      <screen x="0" y="0" width="1364" height="728" />
+    <state x="335" y="0" key="CommitChangelistDialog2" timestamp="1584461788521">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="335" y="0" key="CommitChangelistDialog2/0.0.1364.728@0.0.1364.728" timestamp="1584135132483" />
+    <state x="335" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584461788521" />
     <state x="460" y="117" key="FileChooserDialogImpl" timestamp="1583763326192">
       <screen x="0" y="0" width="1364" height="728" />
     </state>

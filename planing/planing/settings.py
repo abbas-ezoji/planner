@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'planing.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'planing',
+        'NAME': 'planning',
         'USER': 'planuser',
         'PASSWORD': '1qaz!QAZ',
         'HOST': 'localhost',
