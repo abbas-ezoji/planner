@@ -2,21 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0004_auto_20200316_1710.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0005_auto_20200316_1738.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0006_auto_20200316_1752.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0007_auto_20200316_1823.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0008_auto_20200316_1825.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0009_auto_20200316_1829.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0010_auto_20200316_1848.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0011_auto_20200316_1852.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0012_auto_20200316_1902.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0002_auto_20200317_1535.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0003_plan_present_id.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0004_auto_20200317_1614.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0005_auto_20200317_1623.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0006_auto_20200317_1630.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/planing/plan/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/attractions2.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/dist_mat.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/ga_numpy.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/ga_numpy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/planing/plan/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/plan.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/plan.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,10 +102,10 @@
       <screen x="0" y="0" width="1364" height="728" />
     </state>
     <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1364.728@0.0.1364.728" timestamp="1584135139549" />
-    <state x="376" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1584365186713">
+    <state x="376" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1584440176572">
       <screen x="0" y="0" width="1364" height="728" />
     </state>
-    <state x="376" y="186" key="com.intellij.ide.util.TipDialog/0.0.1364.728@0.0.1364.728" timestamp="1584365186713" />
+    <state x="376" y="186" key="com.intellij.ide.util.TipDialog/0.0.1364.728@0.0.1364.728" timestamp="1584440176572" />
     <state x="338" y="17" width="672" height="676" key="search.everywhere.popup" timestamp="1583669692493">
       <screen x="0" y="0" width="1364" height="728" />
     </state>

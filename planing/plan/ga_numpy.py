@@ -250,8 +250,7 @@ class GeneticAlgorithm(object):
         new_population = []
         elite = copy.deepcopy(self.current_generation[0])
         selection = self.selection_function
-        
-        t= self.current_generation
+                
         while len(new_population) < self.population_size:
             parent_1 = copy.deepcopy(selection(self.current_generation))
             parent_2 = copy.deepcopy(selection(self.current_generation))
@@ -360,26 +359,32 @@ class GeneticAlgorithm(object):
 
     def run(self):
         """Run (solve) the Genetic Algorithm."""
-        print('start: '+ strftime("%Y-%m-%d %H:%M:%S:%SS", gmtime()))
+        start = gmtime()
         self.create_first_generation()       
         for g in range(1, self.generations):
             #print('---------- Start ---------------')            
-            #print('generation-' +str(g) + ' -> start: ')                        
-            self.create_next_generation()              
+            print('generation: ' +str(g) + ' - cost: ' +
+                  str(self.current_generation[0].fitness))                        
+            self.create_next_generation()   
+        
+        end = gmtime()
+        duration = ((end.tm_hour-start.tm_hour)*360)+ \
+                   ((end.tm_min-start.tm_min)*60)+ \
+                   (end.tm_sec-start.tm_sec)*1
         print('----------- End ----------------')
         print('best cost: ' + str(self.current_generation[0].fitness))
         print('single_count:' +str(self.single_count))
         print('double_count:' +str(self.double_count))            
         print('mutate_count:' +str(self.mutate_count))
         print('add_swap_count:' +str(self.add_swap_count))
-        print('end: '+ strftime("%Y-%m-%d %H:%M:%S:%SS", gmtime()))
+        print('duration: '+ str(duration) + 'sec')
     def best_individual(self):
         """Return the individual with the best fitness in the current
         generation.
         """
         best = self.current_generation[0] 
-        _, gene = npi.group_by(best.genes[:,0]).max(best.genes)
-        return (best.fitness, gene)
+        _, genes = npi.group_by(best.genes[:,0]).max(best.genes)
+        return (best.fitness, genes)
 
     def last_generation(self):
         """Return members of the last generation as a generator function."""

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (attractions, travelType, distance_mat,
-                     country, province, city)
+                     country, province, city, plan, plan_details)
 
 
 class attractionsAdmin(admin.ModelAdmin):
@@ -19,7 +19,7 @@ class distance_matAdmin(admin.ModelAdmin):
     # pass
     list_display = [field.name for field in distance_mat._meta.get_fields()]
     list_filter = ('origin__country', 'origin__province', 'origin__city', 'origin__title',
-                   'destination__title','travel_type__title')
+                   'destination__title', 'travel_type__title')
 
 
 class countryAdmin(admin.ModelAdmin):
@@ -28,16 +28,30 @@ class countryAdmin(admin.ModelAdmin):
 
 
 class provinceAdmin(admin.ModelAdmin):
-    list_display = ('name',  'phoneCode', )
-    list_filter = ('name',  'phoneCode', 'country__name',)
+    list_display = ('name', 'phoneCode',)
+    list_filter = ('name', 'phoneCode', 'country__name',)
 
 
 class cityAdmin(admin.ModelAdmin):
     # pass
-    list_display = ('name',  'phoneCode', 'latt', 'long')
-    list_filter = ('name',  'phoneCode', 'province__name', 'province__country__name')
+    list_display = ('name', 'phoneCode', 'latt', 'long')
+    list_filter = ('name', 'phoneCode', 'province__name', 'province__country__name')
 
 
+class planAdmin(admin.ModelAdmin):
+    # pass
+    list_display = ('city', 'cost_fullTime', 'cost_lengthTime', 'cost_countPoints', 'cost_minRqTime', 'tags')
+    list_filter = ('city__name', 'tags', 'cost_lengthTime', 'cost_countPoints', 'cost_minRqTime',)
+
+
+class plan_detailsAdmin(admin.ModelAdmin):
+    # pass
+    list_display = ('plan', 'order', 'point', 'len_time')
+    list_filter = ('plan__city__name', 'point__title')
+
+
+admin.site.register(plan, planAdmin)
+admin.site.register(plan_details, plan_detailsAdmin)
 admin.site.register(country, countryAdmin)
 admin.site.register(province, provinceAdmin)
 admin.site.register(city, cityAdmin)

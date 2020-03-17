@@ -11,7 +11,7 @@ class country(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = '0_Country'
+        verbose_name_plural = '0 Country'
 
 
 class province(models.Model):
@@ -23,7 +23,7 @@ class province(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = '1_Province'
+        verbose_name_plural = '1 Province'
 
 
 class city(models.Model):
@@ -37,7 +37,7 @@ class city(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = '2_City'
+        verbose_name_plural = '2 City'
 
 
 class attractions(models.Model):
@@ -66,7 +66,7 @@ class attractions(models.Model):
     #         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = '3_Attractions'
+        verbose_name_plural = '3 Attractions'
         ordering = ('latt', 'long')
         # unique_together = ["details"]
 
@@ -80,7 +80,7 @@ class travelType(models.Model):
         return self.title
 
     class Meta:
-        verbose_name_plural = '4_Travel Types'
+        verbose_name_plural = '4 Travel Types'
 
 
 class distance_mat(models.Model):
@@ -95,7 +95,7 @@ class distance_mat(models.Model):
         return self.origin.title + ' - ' + self.destination.title
 
     class Meta:
-        verbose_name_plural = '6_Distance matrix'
+        verbose_name_plural = '6 Distance matrix'
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -133,3 +133,43 @@ class distance_mat(models.Model):
         ecl_dist = math.sqrt(((dst_latt - ogn_latt) ** 2) + ((dst_long - ogn_long) ** 2))
         self.ecl_dist = ecl_dist
         super(distance_mat, self).save(*args, **kwargs)
+
+
+class plan(models.Model):
+    city = models.ForeignKey(city, on_delete=models.CASCADE)
+    present_id = models.CharField(max_length=50, null=True, blank=True)
+    coh_fullTime = models.FloatField('Coefficient of Fill full time Cost', null=True, blank=True)
+    coh_lengthTime = models.FloatField('Coefficient of distance length time Cost', null=True, blank=True)
+    coh_countPoints = models.FloatField('Coefficient of count of points Cost', null=True, blank=True)
+    coh_minRqTime = models.FloatField('Coefficient of diff min required Time Cost', null=True, blank=True)
+    cost_fullTime = models.FloatField('Fill full time Cost', null=True, blank=True)
+    cost_lengthTime = models.FloatField('Distance length time Cost', null=True, blank=True)
+    cost_countPoints = models.FloatField('Count of points Cost', null=True, blank=True)
+    cost_minRqTime = models.FloatField('Diff min required Time Cost', null=True, blank=True)
+    start_time = models.CharField('Start Time of Day', max_length=20, null=True, blank=True)
+    end_time = models.CharField('End Time of Day', max_length=20, null=True, blank=True)
+    dist_len = models.FloatField('Length of distance times', null=True, blank=True)
+    points_len = models.IntegerField('Count of points used', null=True, blank=True)
+    duration_len = models.FloatField('Length of duration points', null=True, blank=True)
+    tags = models.CharField(max_length=1000, null=True, blank=True)
+    comment = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.city.name
+
+    class Meta:
+        verbose_name_plural = '7 Plan'
+
+
+class plan_details(models.Model):
+    plan = models.ForeignKey(plan, on_delete=models.CASCADE)
+    order = models.IntegerField()
+    point = models.ForeignKey(attractions, on_delete=models.CASCADE)
+    len_time = models.IntegerField()
+
+    def __str__(self):
+        return self.plan.city.name
+
+    class Meta:
+        verbose_name_plural = '7.1 Plan details'
+        ordering = ('plan', 'order', )
