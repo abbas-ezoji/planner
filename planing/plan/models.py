@@ -40,12 +40,19 @@ class city(models.Model):
         verbose_name_plural = '2 City'
 
 
+TYPE_CHOISES = (
+    (0, ("Optionaly")),
+    (1, ("Necessary"))
+)
+
+
 class attractions(models.Model):
     country = models.ForeignKey(country, on_delete=models.CASCADE, null=True, blank=True)
     province = models.ForeignKey(province, on_delete=models.CASCADE, null=True, blank=True)
     city = models.ForeignKey(city, on_delete=models.CASCADE, null=True, blank=True)
-    phoneCode = models.CharField('Phone Code', max_length=10)
-    title = models.CharField('Title', max_length=5000)
+    type = models.IntegerField('Selection Type', default=0, choices=TYPE_CHOISES)
+    phoneCode = models.CharField('Phone Code', max_length=10, null=True, blank=True)
+    title = models.CharField('Title', max_length=5000, null=True, blank=True)
     fullTitle = models.CharField('Full Title', max_length=5000, null=True, blank=True)
     address = models.CharField('Address', max_length=5000, null=True, blank=True)
     cost = models.CharField('Cost', max_length=50, null=True, blank=True)
@@ -66,7 +73,7 @@ class attractions(models.Model):
     #         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = '3 Attractions'
+        verbose_name_plural = '4 Attractions'
         ordering = ('latt', 'long')
         # unique_together = ["details"]
 
@@ -80,14 +87,14 @@ class travelType(models.Model):
         return self.title
 
     class Meta:
-        verbose_name_plural = '4 Travel Types'
+        verbose_name_plural = '5 Travel Types'
 
 
 class distance_mat(models.Model):
     origin = models.ForeignKey(attractions, related_name='distance_mat', on_delete=models.CASCADE)
     destination = models.ForeignKey(attractions, related_name='destination', on_delete=models.CASCADE)
     travel_type = models.ForeignKey(travelType, on_delete=models.CASCADE)
-    ecl_dist = models.FloatField('Euclidean Distance', null=True, blank=True,)
+    ecl_dist = models.FloatField('Euclidean Distance', null=True, blank=True, )
     len_meter = models.FloatField('Lenght Of Meters', null=True, blank=True)
     len_time = models.FloatField('Lenght Of Time', null=True, blank=True)
 
@@ -137,7 +144,7 @@ class distance_mat(models.Model):
 
 class plan(models.Model):
     city = models.ForeignKey(city, on_delete=models.CASCADE)
-    present_id = models.CharField(max_length=50, null=True, blank=True)
+    present_id = models.CharField(max_length=1000, null=True, blank=True)
     coh_fullTime = models.FloatField('Coefficient of Fill full time Cost', null=True, blank=True)
     coh_lengthTime = models.FloatField('Coefficient of distance length time Cost', null=True, blank=True)
     coh_countPoints = models.FloatField('Coefficient of count of points Cost', null=True, blank=True)
@@ -166,10 +173,31 @@ class plan_details(models.Model):
     order = models.IntegerField()
     point = models.ForeignKey(attractions, on_delete=models.CASCADE)
     len_time = models.IntegerField()
+    from_date = models.IntegerField( null=True, blank=True)
 
     def __str__(self):
         return self.plan.city.name
 
     class Meta:
         verbose_name_plural = '7.1 Plan details'
-        ordering = ('plan', 'order', )
+        ordering = ('plan', 'order',)
+
+
+class airport(models.Model):
+    city = models.ForeignKey(city, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField('Name', max_length=1000, null=True, blank=True)
+    icao = models.CharField('ICAO', max_length=10, null=True, blank=True)
+    iata = models.CharField('IATA', max_length=10, null=True, blank=True)
+    type = models.CharField('Type', max_length=20, null=True, blank=True)
+    url = models.CharField('Address url', max_length=100, null=True, blank=True)
+    area_code = models.CharField('Area code', max_length=100, null=True, blank=True)
+    country_code = models.CharField('Country code', max_length=100, null=True, blank=True)
+    city_en = models.CharField('City En', max_length=100, null=True, blank=True)
+    airport_en = models.CharField('AirPort name', max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.airport_en
+
+    class Meta:
+        verbose_name_plural = '3 Airports'
+        ordering = ('city', 'airport_en',)
