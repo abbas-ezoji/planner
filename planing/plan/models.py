@@ -46,11 +46,20 @@ TYPE_CHOISES = (
 )
 
 
+class tags(models.Model):
+    title = models.CharField('Tag Title', max_length=50, null=True, blank=True)
+    comments = models.TextField('Comments', null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+
 class attractions(models.Model):
     country = models.ForeignKey(country, on_delete=models.CASCADE, null=True, blank=True)
     province = models.ForeignKey(province, on_delete=models.CASCADE, null=True, blank=True)
     city = models.ForeignKey(city, on_delete=models.CASCADE, null=True, blank=True)
     type = models.IntegerField('Selection Type', default=0, choices=TYPE_CHOISES)
+    tags = models.ManyToManyField(tags, null=True, blank=True)
     phoneCode = models.CharField('Phone Code', max_length=10, null=True, blank=True)
     title = models.CharField('Title', max_length=5000, null=True, blank=True)
     fullTitle = models.CharField('Full Title', max_length=5000, null=True, blank=True)
@@ -173,7 +182,8 @@ class plan_details(models.Model):
     order = models.IntegerField()
     point = models.ForeignKey(attractions, on_delete=models.CASCADE)
     len_time = models.IntegerField()
-    from_date = models.IntegerField( null=True, blank=True)
+    from_time = models.IntegerField(null=True, blank=True)
+    dist_to = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.plan.city.name

@@ -51,6 +51,8 @@ class GeneticAlgorithm(object):
             row1, col1 = parent_1.shape
             row2, col2 = parent_2.shape
             row = np.min([row1,row2])
+            if row<2:
+                return parent_1, parent_2
             rowt = (random.randrange(1, row - 1 if row>2 else row))
             #print(rowt)
             
@@ -72,6 +74,8 @@ class GeneticAlgorithm(object):
             row1, col1 = parent_1.shape
             row2, col2 = parent_2.shape
             row = np.min([row1,row2])
+            if row<2:
+                return parent_1, parent_2
             rowt1 = (random.randrange(1, row - 1 if row>2 else row))
             rowt2 = (random.randrange(1, row - 1 if row>2 else row))
             #print(rowt1,rowt2)
@@ -93,47 +97,66 @@ class GeneticAlgorithm(object):
             _, child_2 = npi.group_by(child_2[:,0]).max(child_2)
             
             return child_1, child_2
+        
+        def shuffle(parent, meta_data):
+            np.random.shuffle(parent)
+        
+        def mutate(parent, meta_data):
+            child = parent            
+            rq_time = meta_data[:,1]                                            
             
-        def mutate(parent, meta_date):
-            child = parent
-            points = meta_data[0]
-            rq_time = meta_data[1]                                            
-            
-            row , col = child.shape    
-            rowt = random.randrange(1, row - 1 if row>2 else row)
+            row , col = child.shape   
+            if row<2:
+                return child
+            rowChild = random.randrange(1, row - 1 if row>2 else row)
+            rowMeta = random.randrange(1, row - 1 if row>2 else row)
             #print(rowt)
-            child[rowt,0] = np.random.choice(points, size=1)[0]
-            child[rowt,1] = np.random.choice(rq_time, size=1)[0]
+            child[rowChild] = meta_data[rowMeta]
+            child[rowChild,1] = np.random.choice(rq_time, size=1)[0]                         
+            
+            msk = np.isin(meta_data[:,0], child[:,0])
+            points_accpt = meta_data[~msk]
+            points_accpt = points_accpt[points_accpt[:,2]==1]
+            if len(points_accpt)>2:                 
+                child = np.vstack((child, points_accpt))
+                np.random.shuffle(child)
+            
             _, child = npi.group_by(child[:,0]).min(child)
+                             
             return child
         
-        def add_swap(parent, meta_date):
+        def add_swap(parent, meta_data):
             """This function vreate new child with adding
                rows and then swaping last and random row
             """
         
             child = parent
-            points = meta_data[0]
-            rq_time = meta_data[1]
+            points = meta_data[:,0]
+            rq_time = meta_data[:,1]
             
-            msk = np.isin(points, child[:,0])
-            points_accpt = points[~msk]
-            p = 1/len(points_accpt) if len(points_accpt)>0 else 1 
+            msk = np.isin(meta_data[:,0], child[:,0])
+            points_accpt = meta_data[~msk]
+            row = len(points_accpt)
+            p = 1/row if row>0 else 1 
             #print(points_accpt)
             
             while p < 1:
-                #print(p)
-                new_row = np.array([[np.random.choice(points_accpt, 1, p)[0],60]])    
-                child = np.append(child, new_row, axis=0)
-                
-                msk = np.isin(points, child[:,0])
-                points_accpt = points[~msk]
-                p = 1/len(points_accpt) if len(points_accpt)>0 else 1 
+                #print(p)                  
+                rowAcpt = random.randrange(1, row - 1 if row>2 else row)
+                new_row = points_accpt[rowAcpt] 
+                try:
+                    child = np.vstack((child, new_row))
+                except:
+                    print('------------------')
+                msk = np.isin(meta_data[:,0], child[:,0])
+                points_accpt = meta_data[~msk]
+                row = len(points_accpt)
+                p = 1/row if row>0 else 1  
             
             row , col = child.shape
             rowt = random.randrange(1, row - 1 if row>2 else row)
             #print(rowt)
-            child[rowt, 0] ,child[row-1, 0] = child[row-1, 0], child[rowt, 0]
+            child[rowt] ,child[row-1] = child[row-1], child[rowt]
             _, child = npi.group_by(child[:,0]).min(child)
             
             return child
@@ -143,10 +166,10 @@ class GeneticAlgorithm(object):
             """
         
             individual = data[:]
-            points = meta_data[0]
-            rq_time = meta_data[1]
+            points = meta_data[:,0]
+            rq_time = meta_data[:,1]
             #print(data.shape)
-            individual[:, 0] = np.random.choice(points, 
+            individual[:] = np.random.choice(meta_data, 
                                                 size=len(individual),
                                                 replace=False).T
             individual[:, 1] = np.random.choice(rq_time, 
@@ -233,7 +256,8 @@ class GeneticAlgorithm(object):
             individual.set_fitness(self.fitness_function(individual.genes, 
                                                          self.meta_data)
                                   )
-
+                        
+            
     def rank_population(self):
         """Sort the population by fitness according to the order defined by
         maximise_fitness.
@@ -365,7 +389,10 @@ class GeneticAlgorithm(object):
             #print('---------- Start ---------------')            
             print('generation: ' +str(g) + ' - cost: ' +
                   str(self.current_generation[0].fitness))                        
-            self.create_next_generation()   
+            self.create_next_generation()  
+         
+        t = self.current_generation
+        print(len(t))
         
         end = gmtime()
         duration = ((end.tm_hour-start.tm_hour)*360)+ \
@@ -383,8 +410,8 @@ class GeneticAlgorithm(object):
         generation.
         """
         best = self.current_generation[0] 
-        _, genes = npi.group_by(best.genes[:,0]).max(best.genes)
-        return (best.fitness, genes)
+#        _, genes = npi.group_by(best.genes[:,0]).max(best.genes)
+        return (best.fitness, best.genes)
 
     def last_generation(self):
         """Return members of the last generation as a generator function."""

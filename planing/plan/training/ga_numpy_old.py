@@ -94,52 +94,46 @@ class GeneticAlgorithm(object):
             
             return child_1, child_2
             
-        def mutate(parent, meta_data):
-            child = parent            
-            rq_time = meta_data[:,1]                                            
+        def mutate(parent, meta_date):
+            child = parent
+            points = meta_data[0]
+            rq_time = meta_data[1]                                            
             
             row , col = child.shape    
-            rowChild = random.randrange(1, row - 1 if row>2 else row)
-            rowMeta = random.randrange(1, row - 1 if row>2 else row)
+            rowt = random.randrange(1, row - 1 if row>2 else row)
             #print(rowt)
-            child[rowChild] = meta_data[rowMeta]
-            child[rowChild,1] = np.random.choice(rq_time, size=1)[0]
-            
+            child[rowt,0] = np.random.choice(points, size=1)[0]
+            child[rowt,1] = np.random.choice(rq_time, size=1)[0]
             _, child = npi.group_by(child[:,0]).min(child)
             return child
         
-        def add_swap(parent, meta_data):
+        def add_swap(parent, meta_date):
             """This function vreate new child with adding
                rows and then swaping last and random row
             """
         
             child = parent
-            points = meta_data[:,0]
-            rq_time = meta_data[:,1]
+            points = meta_data[0]
+            rq_time = meta_data[1]
             
-            msk = np.isin(meta_data[:,0], child[:,0])
-            points_accpt = meta_data[~msk]
-            row = len(points_accpt)
-            p = 1/row if row>0 else 1 
+            msk = np.isin(points, child[:,0])
+            points_accpt = points[~msk]
+            p = 1/len(points_accpt) if len(points_accpt)>0 else 1 
             #print(points_accpt)
             
             while p < 1:
-                #print(p)                  
-                rowAcpt = random.randrange(1, row - 1 if row>2 else row)
-                new_row = points_accpt[rowAcpt] 
-                try:
-                    child = np.vstack((child, new_row))
-                except:
-                    print('------------------')
-                msk = np.isin(meta_data[:,0], child[:,0])
-                points_accpt = meta_data[~msk]
-                row = len(points_accpt)
-                p = 1/row if row>0 else 1  
+                #print(p)
+                new_row = np.array([[np.random.choice(points_accpt, 1, p)[0],60]])    
+                child = np.append(child, new_row, axis=0)
+                
+                msk = np.isin(points, child[:,0])
+                points_accpt = points[~msk]
+                p = 1/len(points_accpt) if len(points_accpt)>0 else 1 
             
             row , col = child.shape
             rowt = random.randrange(1, row - 1 if row>2 else row)
             #print(rowt)
-            child[rowt] ,child[row-1] = child[row-1], child[rowt]
+            child[rowt, 0] ,child[row-1, 0] = child[row-1, 0], child[rowt, 0]
             _, child = npi.group_by(child[:,0]).min(child)
             
             return child
@@ -149,10 +143,10 @@ class GeneticAlgorithm(object):
             """
         
             individual = data[:]
-            points = meta_data[:,0]
-            rq_time = meta_data[:,1]
+            points = meta_data[0]
+            rq_time = meta_data[1]
             #print(data.shape)
-            individual[:] = np.random.choice(meta_data, 
+            individual[:, 0] = np.random.choice(points, 
                                                 size=len(individual),
                                                 replace=False).T
             individual[:, 1] = np.random.choice(rq_time, 
