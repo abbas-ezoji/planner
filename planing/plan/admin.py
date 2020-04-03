@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import (attractions, travelType, distance_mat,
-                     country, province, city, plan, plan_details, airport)
+                     country, province, city, plan, plan_details,
+                     airport, constraint)
 
 
 class attractionsAdmin(admin.ModelAdmin):
@@ -8,6 +9,12 @@ class attractionsAdmin(admin.ModelAdmin):
     list_display = ('title' , 'country', 'province', 'city',
                     'latt', 'long', 'rq_time', 'vis_time',)
     list_filter = ('country', 'province', 'city', 'tags__title', 'title',)
+
+
+class constraintAdmin(admin.ModelAdmin):
+    # pass
+    list_display = ('title', 'type', 'rq_time', 'vis_time_from', 'vis_time_to')
+    list_filter = ('title', 'type', 'tags__title', 'rq_time', 'vis_time_from', 'vis_time_to')
 
 
 class travelTypeAdmin(admin.ModelAdmin):
@@ -45,7 +52,7 @@ class planAdmin(admin.ModelAdmin):
 
 
 class plan_detailsAdmin(admin.ModelAdmin):
-    # pass
+    pass
     list_display = ('point', 'order', 'from_time', 'len_time', 'dist_to', 'plan',)
     list_filter = ('plan__city__name', 'point__title', 'plan__present_id',
                    'plan__cost_fullTime', 'plan__cost_lengthTime', 'plan__cost_countPoints', 'plan__cost_minRqTime')
@@ -59,6 +66,7 @@ class airportAdmin(admin.ModelAdmin):
 
 
 admin.site.register(airport, airportAdmin)
+admin.site.register(constraint, constraintAdmin)
 admin.site.register(plan, planAdmin)
 admin.site.register(plan_details, plan_detailsAdmin)
 admin.site.register(country, countryAdmin)

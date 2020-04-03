@@ -1,24 +1,22 @@
 ###############################################################################
 '''                     Author: Abbas Ezoji
-                     Email: Abbas,ezoji@gmail.com
-                               '''
+                     Email: Abbas.ezoji@gmail.com
+'''
 ###############################################################################
 import pandas as pd
 import numpy as np
-from ga_numpy import GeneticAlgorithm as ga
 import numpy_indexed as npi
-from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy import create_engine
 import uuid
 import random
-
+from ga_numpy import GeneticAlgorithm as ga
+from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import create_engine
 
 ###############################################################################
 '''                             parameters                            '''
 ###############################################################################
-
 city = 36 
-start_time = 480
+start_time = 0
 end_time = 1440
 
 coh_fultm = 0.6
@@ -53,21 +51,21 @@ engine = create_engine(db_connection)
 ###############################################################################
 '''                             Fetch data from db                          '''
 ###############################################################################
-df = pd.read_sql_query('SELECT * FROM	plan_attractions',con=engine)
+df = pd.read_sql_query('SELECT * FROM plan_attractions WHERE type=0',con=engine)
 df = df.drop(['image'], axis=1)
 
 df_city = df[df['city_id']==city]
 
-dist_mat_query = ''' select 
+dist_mat_query = ''' SELECT 
                          origin_id as orgin
                         ,destination_id as dist
                         ,len_time as len
-                     from 
+                     FROM 
                        plan_distance_mat
-                     where
+                     WHERE
                        origin_id in 
-                       (select id from plan_attractions
-                        where city_id = {0} and type=0)
+                       (SELECT id FROM plan_attractions
+                        WHERE city_id = {0} AND type=0)
                        '''.format(city)
 ###############################################################################
 '''                  Create dist_mat, Const and meta_data                   '''
@@ -83,7 +81,8 @@ dist_mat = pd.pivot_table(dist_df,
                           aggfunc=np.sum)
 ######################''' Create Costraints '''################################             
                                         
-const_df = df_city[df_city['type']==1]
+const_df = pd.read_sql_query('SELECT * FROM plan_attractions WHERE type>0',
+                             con=engine)
 
 vst_time_from = np.array(const_df['vis_time_from'])
 vst_time_to = np.array(const_df['vis_time_to'])
@@ -108,15 +107,12 @@ const = np.array([points,
 len_const = len(const)
 tot_lenTimeConst = np.max(const[:,1]) * len_const
 
-#########''' Create all accepted Points as meta_data '''#######################             
-             
-df_city = df_city[df_city['type']==0]
+#########''' Create all accepted Points as meta_data '''#######################                         
 
 vst_time_from = np.array(df_city['vis_time_from'])
 vst_time_to = np.array(df_city['vis_time_to'])
 points = np.array(df_city['id'])
 rq_time = np.array(df_city['rq_time'])
-types = np.array(df_city['type'])
 len_points = len(points)
 rq_time_mean = np.min(rq_time)
 
@@ -125,7 +121,7 @@ len_accpt_points = (end_time - start_time)/rq_time_mean
 
 meta_data = np.array([points, 
                       rq_time, 
-                      types, 
+                      np.zeros(len_points),     # as zero as type
                       np.zeros(len_points),     # as strat time
                       np.zeros(len_points),     # as distance time
                       np.array(vst_time_from),  # as vst_time_from
@@ -136,7 +132,6 @@ meta_data = np.array([points,
                       ],
                       dtype=int).T
                       
-
 ###############################################################################
 '''               individual General functions                          '''
 ###############################################################################
@@ -170,13 +165,13 @@ def set_const(individual, const):
 def calc_starttime(individual):
     plan = individual 
     pln_pnt = plan[:,0]
-    for i,dist in enumerate(pln_pnt):  
+    for i,dist in enumerate(pln_pnt): 
         if i==0: 
-            plan[i,3] = start_time       
-        elif plan[i-1,2] == 0 and plan[i,2] == 0:
+            plan[i,3] = start_time  
+        elif plan[i-1,2] == 0 and plan[i,2] == 0: # if last and current type not const
             plan[i,4] = dist_mat.loc[pln_pnt[i-1], pln_pnt[i]]
             plan[i,3] = plan[i,4] + plan[i-1,3] + plan[i-1,1]
-        elif plan[i-1,2] == 1 or plan[i,2] == 1:
+        elif plan[i-1,2] > 0 or plan[i,2] > 0:
             plan[i,3] = plan[i-1,3] + plan[i-1,1]
            
     return plan
@@ -205,7 +200,7 @@ np.random.shuffle(pln_gene1)
 '''                  Cost calculation functions                             '''
 ###############################################################################
 def cost_fulltime(individual, end_plan):      
-    cost = np.abs(end_plan  - end_time) / 1440.0     
+    cost = np.abs(end_plan  - end_time) / (end_time - start_time)
       
     return cost
 
@@ -387,4 +382,3 @@ for i, sol in enumerate(sol_df):
              '''.format(plan_id, i, sol[1], sol[0], sol[3], sol[4])
     engine.execute(qry)
     
-

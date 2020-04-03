@@ -40,18 +40,21 @@ class city(models.Model):
         verbose_name_plural = '2 City'
 
 
-TYPE_CHOISES = (
-    (0, ("Optionaly")),
-    (1, ("Necessary"))
-)
-
-
 class tags(models.Model):
     title = models.CharField('Tag Title', max_length=50, null=True, blank=True)
     comments = models.TextField('Comments', null=True, blank=True)
 
     def __str__(self):
         return self.title
+
+
+TYPE_CHOISES = (
+    (0, ("Attraction")),
+    (1, ("Fooding")),
+    (2, ("Resting")),
+    (3, ("Healthing")),
+    (4, ("Others"))
+)
 
 
 class attractions(models.Model):
@@ -61,9 +64,9 @@ class attractions(models.Model):
     type = models.IntegerField('Selection Type', default=0, choices=TYPE_CHOISES)
     tags = models.ManyToManyField(tags, null=True, blank=True)
     phoneCode = models.CharField('Phone Code', max_length=10, null=True, blank=True)
-    title = models.CharField('Title', max_length=5000, null=True, blank=True)
+    title = models.CharField('Title', max_length=200, null=True, blank=True)
     fullTitle = models.CharField('Full Title', max_length=5000, null=True, blank=True)
-    address = models.CharField('Address', max_length=5000, null=True, blank=True)
+    address = models.CharField('Address', max_length=2000, null=True, blank=True)
     cost = models.CharField('Cost', max_length=50, null=True, blank=True)
     description = models.TextField('Description', null=True, blank=True)
     latt = models.DecimalField('Latitude', null=True, blank=True, max_digits=9, decimal_places=6)
@@ -75,7 +78,7 @@ class attractions(models.Model):
     image = models.URLField('Image', null=True, blank=True)
 
     def __str__(self):
-        return self.fullTitle
+        return self.title  # + (' -> const' if self.type > 0 else '')
 
     # def save(self, *args, **kwargs):
     #     if not self.id:
@@ -85,6 +88,22 @@ class attractions(models.Model):
         verbose_name_plural = '4 Attractions'
         ordering = ('latt', 'long')
         # unique_together = ["details"]
+
+
+class constraint(models.Model):
+    title = models.CharField('Title', max_length=200, null=True, blank=True)
+    type = models.IntegerField('Selection Type', default=1, choices=TYPE_CHOISES)
+    tags = models.ManyToManyField(tags, null=True, blank=True)
+    description = models.TextField('Description', null=True, blank=True)
+    rq_time = models.IntegerField('Require Time', null=True, blank=True)
+    vis_time_from = models.IntegerField('Visit Time From', null=True, blank=True)
+    vis_time_to = models.IntegerField('Visit Time To', null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = '4 Constraints'
 
 
 class travelType(models.Model):

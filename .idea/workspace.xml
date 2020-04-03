@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0007_auto_20200323_1529.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0008_attractions_tags.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0009_auto_20200324_1914.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0010_remove_attractions_tags.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0011_attractions_tags.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0012_remove_attractions_tags.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0013_attractions_tags.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0014_remove_attractions_tags.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0015_attractions_tags.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/training/ga_numpy_old.py" afterDir="false" />
+    <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="ADD: train constraints as test.py">
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0016_auto_20200403_1801.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0017_auto_20200403_1911.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0018_auto_20200404_0000.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0019_auto_20200404_0003.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/training/plan_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/iplanner.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iplanner.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/'python" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/planing/plan/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/planing/plan/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/training/ga_numpy.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/ga_numpy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/training/ga_numpy_test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/training/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/training/plan.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/plan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/training/test.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +44,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/venv2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -126,31 +123,31 @@
     <option name="LAST_COMMIT_MESSAGE" value="ADD: train constraints as test.py" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="335" y="0" key="CommitChangelistDialog2" timestamp="1584909888150">
+    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2" timestamp="1585921900733">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="335" y="0" key="CommitChangelistDialog2/0.0.1364.728@0.0.1364.728" timestamp="1584135132483" />
-    <state x="335" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1584909888150" />
-    <state x="461" y="117" key="FileChooserDialogImpl" timestamp="1584465666976">
+    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1585921900733" />
+    <state x="461" y="117" key="FileChooserDialogImpl" timestamp="1585919212867">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="460" y="117" key="FileChooserDialogImpl/0.0.1364.728@0.0.1364.728" timestamp="1583763326192" />
-    <state x="461" y="117" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1584465666976" />
-    <state x="182" y="0" key="SettingsEditor" timestamp="1584861721355">
+    <state x="461" y="117" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1585919212867" />
+    <state x="182" y="0" key="SettingsEditor" timestamp="1585919216818">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="182" y="5" key="SettingsEditor/0.0.1364.728@0.0.1364.728" timestamp="1584134044937" />
-    <state x="182" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1584861721355" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1584909896521">
+    <state x="182" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1585919216818" />
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1585413933757">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1364.728@0.0.1364.728" timestamp="1584135139549" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1584909896521" />
-    <state x="377" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1585403693845">
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1585413933757" />
+    <state x="377" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1585941101087">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="376" y="186" key="com.intellij.ide.util.TipDialog/0.0.1364.728@0.0.1364.728" timestamp="1584440176572" />
-    <state x="377" y="186" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1585403693845" />
+    <state x="377" y="186" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1585941101087" />
     <state x="491" y="279" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584463010848">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
