@@ -15,6 +15,7 @@ class GeneticAlgorithm(object):
     def __init__(self,
                  seed_data,
                  meta_data,
+                 day_count = 1,
                  population_size=50,
                  generations=100,
                  crossover_probability=0.8,
@@ -27,6 +28,7 @@ class GeneticAlgorithm(object):
 
         self.seed_data = seed_data
         self.meta_data = meta_data
+        self.day_count = day_count
         self.population_size = population_size
         self.generations = generations
         self.crossover_probability = crossover_probability
@@ -43,6 +45,13 @@ class GeneticAlgorithm(object):
 
         self.current_generation = []
              
+        def clear_duplicates(plan):
+            
+            z = np.zeros((len(plan),1), dtype=int)            
+            plan = np.append(plan, z, axis=1)
+            plan[:,11] = (plan[:,0]*10)+(plan[:,2]*day)
+            _, plan = npi.group_by().min(plan)
+            numpy.delete(arr, obj, axis=None)
         
         def single_crossover(parent_1, parent_2):   
             """This funcvtion create 2 childs by same sizes
@@ -105,11 +114,12 @@ class GeneticAlgorithm(object):
             child = parent            
             rq_time = meta_data[:,1]                                            
             
-            row , col = child.shape   
+            row = len(child)
+            row_meta = len(meta_data)  
             if row<2:
                 return child
             rowChild = random.randrange(1, row - 1 if row>2 else row)
-            rowMeta = random.randrange(1, row - 1 if row>2 else row)
+            rowMeta = random.randrange(1, row_meta - 1 if row>2 else row)
             #print(rowt)
             child[rowChild] = meta_data[rowMeta]
             child[rowChild,1] = np.random.choice(rq_time, size=1)[0]                         

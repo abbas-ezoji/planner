@@ -173,6 +173,7 @@ class distance_mat(models.Model):
 class plan(models.Model):
     city = models.ForeignKey(city, on_delete=models.CASCADE)
     present_id = models.CharField(max_length=1000, null=True, blank=True)
+    day = models.IntegerField('Day Of Tour', null=True, blank=True)
     coh_fullTime = models.FloatField('Coefficient of Fill full time Cost', null=True, blank=True)
     coh_lengthTime = models.FloatField('Coefficient of distance length time Cost', null=True, blank=True)
     coh_countPoints = models.FloatField('Coefficient of count of points Cost', null=True, blank=True)
@@ -190,7 +191,7 @@ class plan(models.Model):
     comment = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return self.city.name
+        return str(self.day) + ' day ' + self.city.name
 
     class Meta:
         verbose_name_plural = '7 Plan'
