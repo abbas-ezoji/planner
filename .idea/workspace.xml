@@ -2,42 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/planing/plan/management/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/management/commands/fcgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/management/commands/fcgi_old.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/planing/wsgi_windows.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/web.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/iplanner.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iplanner.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0002_auto_20200317_2226.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0003_auto_20200318_1633.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0004_airport.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0005_auto_20200322_1353.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0006_auto_20200323_0110.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0007_auto_20200323_1529.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0008_attractions_tags.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0009_auto_20200324_1914.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0010_remove_attractions_tags.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0011_attractions_tags.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0012_remove_attractions_tags.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0013_attractions_tags.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0014_remove_attractions_tags.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0015_attractions_tags.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0016_auto_20200403_1801.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0017_auto_20200403_1911.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0018_auto_20200404_0000.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0019_auto_20200404_0003.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0020_plan_day.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/training/plan.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/plan.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/training/plan_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/plan_new.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/planing/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/planing/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/planing/planing/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/planing/wsgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/scrapy/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/scrapy/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/scrapy/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/scrapy/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/scrapy/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/scrapy/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586032579343</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Migration to sql server">
+      <created>1586276085075</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1586276085076</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -191,14 +164,15 @@
     <MESSAGE value="ADD: apis and plan edit" />
     <MESSAGE value="ADD: train constraints as test.py" />
     <MESSAGE value="ADD: plan_new as plan by dynamic StartTime and Const" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: plan_new as plan by dynamic StartTime and Const" />
+    <MESSAGE value="Migration to sql server" />
+    <option name="LAST_COMMIT_MESSAGE" value="Migration to sql server" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2" timestamp="1586276062435">
+    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2" timestamp="1586276083059">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="335" y="0" key="CommitChangelistDialog2/0.0.1364.728@0.0.1364.728" timestamp="1584135132483" />
-    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1586276062435" />
+    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1586276083059" />
     <state x="461" y="117" key="FileChooserDialogImpl" timestamp="1586252794747">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -225,11 +199,11 @@
     </state>
     <state x="182" y="5" key="SettingsEditor/0.0.1364.728@0.0.1364.728" timestamp="1584134044937" />
     <state x="182" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1586179322631" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1586032585037">
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1586276092202">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1364.728@0.0.1364.728" timestamp="1584135139549" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1586032585037" />
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1586276092202" />
     <state x="377" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1586275912362">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
