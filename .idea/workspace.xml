@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="ADD: plan_new as plan by dynamic StartTime and Const">
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0020_plan_day.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/training/tt.py" afterDir="false" />
+    <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/planing/plan/management/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/management/commands/fcgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/plan/management/commands/fcgi_old.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/planing/wsgi_windows.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/iplanner.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iplanner.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0002_auto_20200317_2226.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0003_auto_20200318_1633.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0004_airport.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0005_auto_20200322_1353.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0006_auto_20200323_0110.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0007_auto_20200323_1529.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0008_attractions_tags.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0009_auto_20200324_1914.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0010_remove_attractions_tags.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0011_attractions_tags.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0012_remove_attractions_tags.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0013_attractions_tags.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0014_remove_attractions_tags.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0015_attractions_tags.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0016_auto_20200403_1801.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0017_auto_20200403_1911.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0018_auto_20200404_0000.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0019_auto_20200404_0003.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/migrations/0020_plan_day.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/planing/plan/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/training/ga_numpy.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/ga_numpy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/training/plan.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/plan.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/planing/plan/training/plan_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/plan_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/planing/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/planing/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/planing/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/planing/wsgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/scrapy/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/scrapy/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/scrapy/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/scrapy/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/scrapy/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/scrapy/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +52,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
@@ -48,6 +83,34 @@
       <recent name="C:\MyFiles\Projects\iplanner\planing\scrapy" />
       <recent name="C:\MyFiles\Projects\iplanner\planing" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="fcgi" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="iplanner" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/planing/plan/management/commands" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/planing/plan/management/commands/fcgi.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.fcgi" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -109,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585942966456</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="ADD: plan_new as plan by dynamic StartTime and Const">
+      <created>1586032579343</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1586032579343</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -124,31 +194,47 @@
     <option name="LAST_COMMIT_MESSAGE" value="ADD: plan_new as plan by dynamic StartTime and Const" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2" timestamp="1586007114368">
+    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2" timestamp="1586276062435">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="335" y="0" key="CommitChangelistDialog2/0.0.1364.728@0.0.1364.728" timestamp="1584135132483" />
-    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1586007114368" />
-    <state x="461" y="117" key="FileChooserDialogImpl" timestamp="1585919212867">
+    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1586276062435" />
+    <state x="461" y="117" key="FileChooserDialogImpl" timestamp="1586252794747">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="460" y="117" key="FileChooserDialogImpl/0.0.1364.728@0.0.1364.728" timestamp="1583763326192" />
-    <state x="461" y="117" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1585919212867" />
-    <state x="182" y="0" key="SettingsEditor" timestamp="1585919216818">
+    <state x="461" y="117" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1586252794747" />
+    <state width="1342" height="173" key="GridCell.Tab.0.bottom" timestamp="1586125066182">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1342" height="173" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586125066182" />
+    <state width="1342" height="173" key="GridCell.Tab.0.center" timestamp="1586125066182">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1342" height="173" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586125066182" />
+    <state width="1342" height="173" key="GridCell.Tab.0.left" timestamp="1586125066182">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1342" height="173" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586125066182" />
+    <state width="1342" height="173" key="GridCell.Tab.0.right" timestamp="1586125066182">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1342" height="173" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586125066182" />
+    <state x="182" y="0" key="SettingsEditor" timestamp="1586179322631">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="182" y="5" key="SettingsEditor/0.0.1364.728@0.0.1364.728" timestamp="1584134044937" />
-    <state x="182" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1585919216818" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1585942973704">
+    <state x="182" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1586179322631" />
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1586032585037">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1364.728@0.0.1364.728" timestamp="1584135139549" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1585942973704" />
-    <state x="377" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1585986606067">
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1586032585037" />
+    <state x="377" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1586275912362">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="376" y="186" key="com.intellij.ide.util.TipDialog/0.0.1364.728@0.0.1364.728" timestamp="1584440176572" />
-    <state x="377" y="186" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1585986606067" />
+    <state x="377" y="186" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1586275912362" />
     <state x="491" y="279" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584463010848">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -157,5 +243,15 @@
       <screen x="0" y="0" width="1364" height="728" />
     </state>
     <state x="338" y="17" width="672" height="676" key="search.everywhere.popup/0.0.1364.728@0.0.1364.728" timestamp="1583669692493" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/planing/scrapy/admin.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

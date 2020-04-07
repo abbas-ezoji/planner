@@ -6,15 +6,15 @@ from django.conf import settings
 import pandas as pd
 from sqlalchemy.exc import SQLAlchemyError
 
-db_connection_url = "postgresql://{}:{}@{}:{}/{}".format(
-    settings.DATABASES['default']['USER'],
-    settings.DATABASES['default']['PASSWORD'],
-    settings.DATABASES['default']['HOST'],
-    settings.DATABASES['default']['PORT'],
-    settings.DATABASES['default']['NAME'],
-)
-
-engine = create_engine(db_connection_url)
+# db_connection_url = "postgresql://{}:{}@{}:{}/{}".format(
+#     settings.DATABASES['default']['USER'],
+#     settings.DATABASES['default']['PASSWORD'],
+#     settings.DATABASES['default']['HOST'],
+#     settings.DATABASES['default']['PORT'],
+#     settings.DATABASES['default']['NAME'],
+# )
+#
+# engine = create_engine(db_connection_url)
 
 
 def update_points():
@@ -26,11 +26,11 @@ def update_points():
     last_data = df['details']
     data = data[~data.details.isin(last_data)]
     print('titles: ' + data)
-    try:
-        data.to_sql(points._meta.db_table, engine, if_exists='append', index=False, chunksize=10000)
-    except SQLAlchemyError as e:
-        error = str(e.__dict__['orig'])
-        print(error)
+    # try:
+    #     data.to_sql(points._meta.db_table, engine, if_exists='append', index=False, chunksize=10000)
+    # except SQLAlchemyError as e:
+    #     error = str(e.__dict__['orig'])
+    #     print(error)
 
 
 class PointsAdmin(admin.ModelAdmin):

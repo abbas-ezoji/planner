@@ -11,6 +11,21 @@ import random
 from ga_numpy import GeneticAlgorithm as ga
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import create_engine
+
+###############################################################################
+'''                             parameters                            '''
+###############################################################################
+city = 36 
+start_time = 420
+end_time = 1440 
+days = 3
+
+coh_fultm = 0.6
+coh_lntm  = 0.2
+coh_cnt   = 0.05
+coh_dffRqTime  = 0.075
+coh_dffVisTime  = 0.075
+
 ###############################################################################
 '''                  Cost calculation functions                             '''
 ###############################################################################
@@ -145,21 +160,6 @@ def fitness(individual, meta_data):
     
     return cost #*(1 + (coh_pnlty*penalty))
 
-
-###############################################################################
-'''                             parameters                            '''
-###############################################################################
-city = 36 
-start_time = 420
-end_time = 1440 
-days = 3
-
-coh_fultm = 0.6
-coh_lntm  = 0.2
-coh_cnt   = 0.05
-coh_dffRqTime  = 0.075
-coh_dffVisTime  = 0.075
-
 ###############################################################################
 '''                             connection config                           '''
 ###############################################################################
@@ -168,10 +168,9 @@ PASSWORD = '1qaz!QAZ'
 HOST = 'localhost'
 PORT = '5432'
 NAME = 'planning'
-db_connection = "postgresql://{}:{}@{}:{}/{}".format(USER,
+db_connection = "postgresql://{}:{}@{}/{}".format(USER,
                                                      PASSWORD,
-                                                     HOST,
-                                                     PORT,
+                                                     HOST,                                                     
                                                      NAME
                                                         )
 engine = create_engine(db_connection)

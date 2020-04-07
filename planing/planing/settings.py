@@ -84,17 +84,29 @@ WSGI_APPLICATION = 'planing.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'planning',
+#         'USER': 'planuser',
+#         'PASSWORD': '1qaz!QAZ',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'planning',
-        'USER': 'planuser',
+        'ENGINE': 'sql_server.pyodbc',
+        'HOST': '192.168.1.36\MSSQL2017',
+        'USER': 'sa',
         'PASSWORD': '1qaz!QAZ',
-        'HOST': 'localhost',
-        'PORT': '5432',
+
+        'OPTIONS': {
+                    'driver': 'SQL Server Native Client 11.0',
+                }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

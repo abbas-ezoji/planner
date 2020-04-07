@@ -65,7 +65,7 @@ class attractions(models.Model):
     tags = models.ManyToManyField(tags, null=True, blank=True)
     phoneCode = models.CharField('Phone Code', max_length=10, null=True, blank=True)
     title = models.CharField('Title', max_length=200, null=True, blank=True)
-    fullTitle = models.CharField('Full Title', max_length=5000, null=True, blank=True)
+    fullTitle = models.TextField('Full Title', null=True, blank=True)
     address = models.CharField('Address', max_length=2000, null=True, blank=True)
     cost = models.CharField('Cost', max_length=50, null=True, blank=True)
     description = models.TextField('Description', null=True, blank=True)
