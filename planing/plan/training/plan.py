@@ -42,7 +42,7 @@ PASSWORD = '1qaz!QAZ'
 HOST = 'localhost'
 PORT = '5432'
 NAME = 'planning'
-db_connection = "mssql+pyodbc://{}:{}@{}:{}/{}".format(USER,
+db_connection = "postgresql://{}:{}@{}:{}/{}".format(USER,
                                                      PASSWORD,
                                                      HOST,
                                                      PORT,

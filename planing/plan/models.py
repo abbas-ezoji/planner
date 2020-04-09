@@ -40,12 +40,30 @@ class city(models.Model):
         verbose_name_plural = '2 City'
 
 
-class tags(models.Model):
-    title = models.CharField('Tag Title', max_length=50, null=True, blank=True)
+class department(models.Model):
+    title = models.CharField('Title', max_length=50, null=True, blank=True)
     comments = models.TextField('Comments', null=True, blank=True)
 
     def __str__(self):
         return self.title
+
+
+class category(models.Model):
+    department = models.ForeignKey(department, null=True, blank=True, on_delete=models.CASCADE)
+    title = models.CharField('Title', max_length=50, null=True, blank=True)
+    comments = models.TextField('Comments', null=True, blank=True)
+
+    def __str__(self):
+        return self.department.title + ' -> ' + self.title
+
+
+class tags(models.Model):
+    category = models.ForeignKey(category, null=True, blank=True, on_delete=models.CASCADE)
+    title = models.CharField('Tag Title', max_length=50, null=True, blank=True)
+    comments = models.TextField('Comments', null=True, blank=True)
+
+    def __str__(self):
+        return self.category.department.title + ' -> ' + self.category.title + ' -> ' + self.title
 
 
 TYPE_CHOISES = (
@@ -210,7 +228,7 @@ class plan_details(models.Model):
 
     class Meta:
         verbose_name_plural = '7.1 Plan details'
-        ordering = ('plan', 'order',)
+        ordering = ('plan__day', 'order',)
 
 
 class airport(models.Model):

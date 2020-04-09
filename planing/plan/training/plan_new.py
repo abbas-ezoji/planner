@@ -8,9 +8,11 @@ import numpy as np
 import numpy_indexed as npi
 import uuid
 import random
+import pyodbc
 from ga_numpy import GeneticAlgorithm as ga
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import create_engine
+from time import gmtime, strftime
 
 ###############################################################################
 '''                             parameters                            '''
@@ -19,6 +21,9 @@ city = 36
 start_time = 420
 end_time = 1440 
 days = 3
+
+population_size = 50
+generations = 200
 
 coh_fultm = 0.6
 coh_lntm  = 0.2
@@ -163,23 +168,25 @@ def fitness(individual, meta_data):
 ###############################################################################
 '''                             connection config                           '''
 ###############################################################################
-USER = 'planuser'
+USER = 'sa'
 PASSWORD = '1qaz!QAZ'
-HOST = 'localhost'
-PORT = '5432'
+HOST = '192.168.1.36\MSSQL2017'
+PORT = '1433'
 NAME = 'planning'
-db_connection = "postgresql://{}:{}@{}/{}".format(USER,
-                                                     PASSWORD,
-                                                     HOST,                                                     
-                                                     NAME
-                                                        )
-engine = create_engine(db_connection)
-
+conn_str = (
+    r'DRIVER={SQL Server};'
+    r'SERVER=192.168.1.36\MSSQL2017;'
+    r'DATABASE=planning;'
+    r'UID=sa;'
+    r'PWD=1qaz!QAZ;'
+)
+engine = pyodbc.connect(conn_str)
+cursor = engine.cursor() 
 ###############################################################################
 '''                             Fetch data from db                          '''
 ###############################################################################
 df = pd.read_sql_query('''SELECT * FROM 
-                          plan_attractions WHERE type=0''',
+                          [planning]..plan_attractions WHERE type=0''',
                        con=engine)
 df = df.drop(['image'], axis=1)
 
@@ -239,11 +246,17 @@ tot_lenTimeConst = np.mean(const[:,1]) * len_const
 
 #########''' Create all accepted Points as meta_data '''#######################                         
 plan = []
-present_id = str(uuid.uuid1())
+train_time = gmtime()
+time_str = str(train_time.tm_year) + '-' + \
+           str(train_time.tm_mon) + '-' + \
+           str(train_time.tm_mday) + '-' + \
+           str(train_time.tm_hour) + '-' + \
+           str(train_time.tm_min) + '-' + \
+           str(train_time.tm_sec)
+           
+present_id = str(city) + '-' + str(days) + '-'  + time_str
 
-for day in range(1,days+1):
-    start_time = 420
-    end_time = 1440 
+for day in range(1,days+1):    
 
     last_pints = pd.read_sql_query('''SELECT pd.point_id 
                                     FROM 
@@ -295,8 +308,8 @@ for day in range(1,days+1):
     if (day==1):
         ga = ga(seed_data=pln_gene1,
                 meta_data=meta_data,    
-                population_size=50,
-                generations=200,
+                population_size=population_size,
+                generations=generations,
                 crossover_probability=0.8,
                 mutation_probability=0.2,
                 elitism=True,
@@ -377,7 +390,7 @@ for day in range(1,days+1):
                               day
                               )
     
-    engine.execute(query_plan)               
+    cursor.execute(query_plan)               
     
     inserted_plan = pd.read_sql_query('''SELECT * 
                                       FROM plan_plan
@@ -396,5 +409,5 @@ for day in range(1,days+1):
                                    dist_to)
                  values({0}, {1}, {2}, {3}, {4}, {5})
                  '''.format(plan_id, i, sol[1], sol[0], sol[3], sol[4])
-        engine.execute(qry)
-    
+        cursor.execute(qry)
+    cursor.commit()
