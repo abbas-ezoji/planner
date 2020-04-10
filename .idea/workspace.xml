@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0002_auto_20200409_1952.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0003_auto_20200409_2001.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0004_auto_20200409_2055.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0005_auto_20200409_2056.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0006_auto_20200409_2137.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0007_auto_20200409_2138.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/training/plan.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/plan.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/training/plan_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/plan_new.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586280274049</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="use pyodbc for training plan">
+      <created>1586464743260</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1586464743260</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -181,14 +179,15 @@
     <MESSAGE value="ADD: plan_new as plan by dynamic StartTime and Const" />
     <MESSAGE value="Migration to sql server" />
     <MESSAGE value="congif for iis" />
-    <option name="LAST_COMMIT_MESSAGE" value="congif for iis" />
+    <MESSAGE value="use pyodbc for training plan" />
+    <option name="LAST_COMMIT_MESSAGE" value="use pyodbc for training plan" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2" timestamp="1586280272874">
+    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2" timestamp="1586464741871">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="335" y="0" key="CommitChangelistDialog2/0.0.1364.728@0.0.1364.728" timestamp="1584135132483" />
-    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1586280272874" />
+    <state x="335" y="0" width="1005" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1586464741871" />
     <state x="461" y="117" key="FileChooserDialogImpl" timestamp="1586252794747">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -215,11 +214,11 @@
     </state>
     <state x="182" y="5" key="SettingsEditor/0.0.1364.728@0.0.1364.728" timestamp="1584134044937" />
     <state x="182" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1586179322631" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1586280282024">
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1586464749186">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1364.728@0.0.1364.728" timestamp="1584135139549" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1586280282024" />
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1586464749186" />
     <state x="377" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1586437884156">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -173,15 +173,13 @@ PASSWORD = '1qaz!QAZ'
 HOST = '192.168.1.36\MSSQL2017'
 PORT = '1433'
 NAME = 'planning'
-conn_str = (
-    r'DRIVER={SQL Server};'
-    r'SERVER=192.168.1.36\MSSQL2017;'
-    r'DATABASE=planning;'
-    r'UID=sa;'
-    r'PWD=1qaz!QAZ;'
-)
-engine = pyodbc.connect(conn_str)
-cursor = engine.cursor() 
+engine = create_engine('mssql+pyodbc://{}:{}@{}/{}?driver=SQL+Server' \
+                       .format(USER,
+                               PASSWORD,
+                               HOST,
+                               NAME
+                               ))
+# cursor = engine.cursor() 
 ###############################################################################
 '''                             Fetch data from db                          '''
 ###############################################################################
@@ -390,7 +388,7 @@ for day in range(1,days+1):
                               day
                               )
     
-    cursor.execute(query_plan)               
+    engine.execute(query_plan)               
     
     inserted_plan = pd.read_sql_query('''SELECT * 
                                       FROM plan_plan
@@ -409,5 +407,5 @@ for day in range(1,days+1):
                                    dist_to)
                  values({0}, {1}, {2}, {3}, {4}, {5})
                  '''.format(plan_id, i, sol[1], sol[0], sol[3], sol[4])
-        cursor.execute(qry)
-    cursor.commit()
+        engine.execute(qry)
+    # cursor.commit()
