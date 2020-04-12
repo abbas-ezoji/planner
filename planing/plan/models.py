@@ -93,6 +93,8 @@ class attractions(models.Model):
     vis_time = models.CharField('Visit Time Range', max_length=50, null=True, blank=True)
     vis_time_from = models.IntegerField('Visit Time From', null=True, blank=True)
     vis_time_to = models.IntegerField('Visit Time To', null=True, blank=True)
+    like_no = models.IntegerField('Likes', null=True, blank=True)
+    view_no = models.IntegerField('Views', null=True, blank=True)
     image = models.URLField('Image', null=True, blank=True)
 
     def __str__(self):
