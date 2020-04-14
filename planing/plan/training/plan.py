@@ -20,10 +20,10 @@ from time import gmtime, strftime
 city = 36 
 start_time = 420
 end_time = 1440 
-days = 2
+days = 1
 
 population_size = 50
-generations = 200
+generations = 1000
 
 coh_fultm = 0.6
 coh_lntm  = 0.1
@@ -203,7 +203,7 @@ df = pd.read_sql_query('''SELECT * FROM
 df = df.drop(['fullTitle', 'address', 'description','image'], axis=1)
 
 df_city = df[df['city_id']==city]
-df_city['rate'] = (df_city['like_no']*10) + df_city['view_no']
+df_city['rate'] = (df_city['like_no']*60) + (df_city['view_no']*40)
 
 dist_mat_query = ''' SELECT 
                          origin_id as orgin
@@ -327,6 +327,7 @@ for day in range(1,days+1):
                 meta_data=meta_data,    
                 population_size=population_size,
                 generations=generations,
+                current_generation_count = 0,
                 crossover_probability=0.8,
                 mutation_probability=0.2,
                 elitism=True,
@@ -429,5 +430,9 @@ for day in range(1,days+1):
                                    dist_to)
                  values({0}, {1}, {2}, {3}, {4}, {5})
                  '''.format(plan_id, i, sol[1], sol[0], sol[3], sol[4])
-        engine.execute(qry)
-    # cursor.commit()
+        engine.execute(qry)    
+
+
+last_gens = ga.last_generation()   
+
+last_genes = [gene.get_geneInfo() for gene in last_gens]

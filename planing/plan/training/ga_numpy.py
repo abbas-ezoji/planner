@@ -1,4 +1,5 @@
 import copy
+import math
 from operator import attrgetter
 import numpy as np
 import random
@@ -18,6 +19,7 @@ class GeneticAlgorithm(object):
                  day_count = 1,
                  population_size=50,
                  generations=100,
+                 current_generation_count = 0,
                  crossover_probability=0.8,
                  mutation_probability=0.2,
                  elitism=True,
@@ -31,6 +33,7 @@ class GeneticAlgorithm(object):
         self.day_count = day_count
         self.population_size = population_size
         self.generations = generations
+        self.current_generation_count = current_generation_count
         self.crossover_probability = crossover_probability
         self.mutation_probability = mutation_probability
         self.elitism = elitism
@@ -43,15 +46,7 @@ class GeneticAlgorithm(object):
         self.initial_elit_prob=initial_elit_prob,
         self.initial_random_prob = initial_random_prob
 
-        self.current_generation = []
-             
-        def clear_duplicates(plan):
-            
-            z = np.zeros((len(plan),1), dtype=int)            
-            plan = np.append(plan, z, axis=1)
-            plan[:,11] = (plan[:,0]*10)+(plan[:,2]*day)
-            _, plan = npi.group_by().min(plan)
-            numpy.delete(arr, obj, axis=None)
+        self.current_generation = []                
         
         def single_crossover(parent_1, parent_2):   
             """This funcvtion create 2 childs by same sizes
@@ -243,13 +238,12 @@ class GeneticAlgorithm(object):
         """
         initial_population = []
         individual = Chromosome(self.seed_data)        
-        parent = copy.deepcopy(individual)
-        
+        parent = copy.deepcopy(individual)        
                
         for i in range(self.population_size):
             genes = self.create_individual(self.seed_data,self.meta_data)                     
-            individual = Chromosome(genes)                              
-            individual.life_cycle = 1                                  
+            individual = Chromosome(genes)  
+            individual.life_cycle = 1                                                                                  
             self.single_count += 1
             initial_population.append(individual)
         
@@ -264,7 +258,8 @@ class GeneticAlgorithm(object):
         """
         for individual in self.current_generation:
             individual.set_fitness(self.fitness_function(individual.genes, 
-                                                         self.meta_data)
+                                                         self.meta_data),
+                                   self.current_generation_count
                                   )
                         
             
@@ -275,6 +270,10 @@ class GeneticAlgorithm(object):
         self.current_generation.sort(
             key=attrgetter('fitness'), reverse=self.maximise_fitness)
         
+        current_generation = self.current_generation
+        population_size = self.population_size
+        self.current_generation = current_generation[0:population_size]
+        
         
 
     def create_new_population(self):
@@ -284,14 +283,14 @@ class GeneticAlgorithm(object):
         new_population = []
         elite = copy.deepcopy(self.current_generation[0])
         selection = self.selection_function
+        
+        max_pops = self.population_size*3
                 
-        while len(new_population) < self.population_size:
-            parent_1 = copy.deepcopy(selection(self.current_generation))
-            parent_2 = copy.deepcopy(selection(self.current_generation))
+        while len(new_population) < max_pops:
+            parent_1 = selection(self.current_generation)
+            parent_2 = selection(self.current_generation)
 
-            child_1, child_2 = parent_1, parent_2
-            child_1.parent_fitness, child_2.parent_fitness = (parent_1.fitness, 
-                                                              parent_2.fitness)
+            child_1, child_2 = copy.deepcopy(parent_1), copy.deepcopy(parent_2)            
             #-------------------- use tabu search ----------------------------#
             ''' if parent_1 or parent_2 use any opertator then these operators
                 shoud not play for create child_1 and child_2.
@@ -367,10 +366,19 @@ class GeneticAlgorithm(object):
             
 
             new_population.append(child_1)
-            if len(new_population) < self.population_size:
+            child_1.life_cycle = 1
+            if len(new_population) < max_pops:
                 new_population.append(child_2)
+                child_2.life_cycle = 1
+            if len(new_population) < max_pops:
+                new_population.append(parent_1)
+                parent_1.life_cycle += 1
+            if len(new_population) < max_pops:
+                new_population.append(parent_2)
+                parent_1.life_cycle += 1
 
         if self.elitism:
+            elite.life_cycle +=1
             new_population[0] = elite
 
         self.current_generation = new_population
@@ -394,11 +402,13 @@ class GeneticAlgorithm(object):
     def run(self):
         """Run (solve) the Genetic Algorithm."""
         start = gmtime()
+        self.current_generation_count = 1
         self.create_first_generation()       
         for g in range(1, self.generations):
             #print('---------- Start ---------------')            
             print('generation: ' +str(g) + ' - cost: ' +
-                  str(self.current_generation[0].fitness))                        
+                  str(self.current_generation[0].fitness)) 
+            self.current_generation_count += 1                       
             self.create_next_generation()  
          
         t = self.current_generation
@@ -425,8 +435,7 @@ class GeneticAlgorithm(object):
 
     def last_generation(self):
         """Return members of the last generation as a generator function."""
-        return ((member.fitness, member.genes) for member
-                in self.current_generation)
+        return self.current_generation
 
 
 class Chromosome(object):
@@ -446,18 +455,22 @@ class Chromosome(object):
         self.add_swap_count = 0
         self.elit = 0
         
-    def get_genes(self):
+    def get_geneInfo(self):
         
-        return self.genes
+        return [self.genes, self.fitness, self.parent_fitness, 
+                self.life_cycle]
 
     def __repr__(self):
         """Return initialised Chromosome representation in human readable form.
         """
         return repr((self.fitness, self.genes))
-    def set_fitness(self, fitness):
-        self.life_cycle += 1
-        #print('life_cycle:' + str(self.life_cycle))
-        self.fitness = fitness
+    def set_fitness(self, fitness, current_generation_count):                
+        coh_eff_chromsom = (self.life_cycle * 
+                            (1- math.exp(-self.life_cycle/current_generation_count)
+                             ))
+        
+        self.fitness = coh_eff_chromsom * fitness
+        
         if self.parent_fitness == self.fitness :
             self.fitness_const_count += 1
             #print('fitness_const_count:' + str(self.fitness_const_count))
