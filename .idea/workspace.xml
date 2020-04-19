@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="EDIT: ga_numpy &#10;coh_eff_chromsom based on life_cycle for prevent crwoding problem&#10;create new generation with last parents and new child together">
-      <change afterPath="$PROJECT_DIR$/planing/api/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/api/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/api/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/api/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/api/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/api/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/api/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/api/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/api/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0003_plan_cost_rate.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/planing/plan/migrations/0004_auto_20200419_2132.py" afterDir="false" />
+    <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/planing/api/filter/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/api/filter/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/planing/api/filter/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/training/ga_numpy.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/ga_numpy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/training/plan.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/plan.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/plan/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/planing/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/planing/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/planing/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/planing/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/api/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/api/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/api/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,13 +46,13 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/planing/plan" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/planing/api" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Projects\planner-master\planner\planing\plan" />
       <recent name="E:\Projects\planner-master\planner\planing\api" />
+      <recent name="E:\Projects\planner-master\planner\planing\plan" />
       <recent name="C:\MyFiles\Projects\iplanner\planing\scrapy" />
       <recent name="C:\MyFiles\Projects\iplanner\planing" />
     </key>
@@ -207,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586895972026</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="ADD: api restFul">
+      <created>1587317851505</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1587317851505</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -225,14 +223,15 @@
     <MESSAGE value="use sqlalchamy for sql server" />
     <MESSAGE value="ADD: Rate cost&#10;rate = (like * 10) + view" />
     <MESSAGE value="EDIT: ga_numpy &#10;coh_eff_chromsom based on life_cycle for prevent crwoding problem&#10;create new generation with last parents and new child together" />
-    <option name="LAST_COMMIT_MESSAGE" value="EDIT: ga_numpy &#10;coh_eff_chromsom based on life_cycle for prevent crwoding problem&#10;create new generation with last parents and new child together" />
+    <MESSAGE value="ADD: api restFul" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD: api restFul" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="69" y="0" width="1271" height="728" key="CommitChangelistDialog2" timestamp="1587306128050">
+    <state x="69" y="0" width="1271" height="728" key="CommitChangelistDialog2" timestamp="1587317849548">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="335" y="0" key="CommitChangelistDialog2/0.0.1364.728@0.0.1364.728" timestamp="1584135132483" />
-    <state x="69" y="0" width="1271" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587306128050" />
+    <state x="69" y="0" width="1271" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587317849548" />
     <state x="461" y="117" key="FileChooserDialogImpl" timestamp="1586252794747">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -259,11 +258,11 @@
     </state>
     <state x="182" y="5" key="SettingsEditor/0.0.1364.728@0.0.1364.728" timestamp="1584134044937" />
     <state x="182" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1586179322631" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1586895987534">
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1587317854620">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1364.728@0.0.1364.728" timestamp="1584135139549" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1586895987534" />
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1587317854620" />
     <state x="377" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1586437884156">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

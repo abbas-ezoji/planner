@@ -1,6 +1,7 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
+from django.shortcuts import get_list_or_404, get_object_or_404
 from plan import models
 from . import serializers
 import datetime
@@ -10,6 +11,16 @@ import datetime
 class ListCountry(generics.ListCreateAPIView):
     queryset = models.country.objects.all()
     serializer_class = serializers.SerializerCountry
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        filter = {}
+        for field in self.multiple_lookup_fields:
+            filter[field] = self.kwargs[field]
+
+        obj = get_object_or_404(queryset, **filter)
+        self.check_object_permissions(self.request, obj)
+        return obj
 
 
 @permission_classes([AllowAny, ])

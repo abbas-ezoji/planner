@@ -25,3 +25,9 @@ class SerializerAttraction(serializers.ModelSerializer):
     class Meta:
         model = models.attraction
         fields = '__all__'
+
+
+class SerializerPlan(serializers.ModelSerializer):
+    class Meta:
+        model = models.plan
+        fields = '__all__'

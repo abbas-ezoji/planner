@@ -1,10 +1,10 @@
 from django.urls import path
-from django.conf.urls import url,include
+from django.conf.urls import url, include
 
 from . import views
 
 urlpatterns = [
-    # url(r'^filter/', include('api.filter.urls')),
+    url(r'^filter/', include('api.filter.urls')),
     # url(r'^users/', include('api.users.urls')),
     path('country/', views.ListCountry.as_view()),
     path('country/<int:pk>/', views.ListCountry.as_view()),
