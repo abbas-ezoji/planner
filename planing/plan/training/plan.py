@@ -23,14 +23,17 @@ end_time = 1440
 days = 1
 
 population_size = 50
-generations = 1000
+generations = 500
+
+coh_pnlty = 10
 
 coh_fultm = 0.6
 coh_lntm  = 0.1
 coh_cnt   = 0.05
 coh_dffRqTime  = 0.075
 coh_dffVisTime  = 0.075
-coh_rate = 0.1
+
+coh_rate = 1
 
 ###############################################################################
 '''                  Cost calculation functions                             '''
@@ -73,9 +76,11 @@ def cost_rate(individual, meta_data):
     plan = individual
     max_rate = np.max(meta_data[:,10])
     max_rate_plan = np.max(plan[:,10])
+    min_rate_plan = np.min(plan[:,10])
+    diff_rate = max_rate_plan - min_rate_plan
     len_pln = len(plan)
     chebi_cost = (max_rate - max_rate_plan)/max_rate
-    norm_cost = np.sum(max_rate_plan - plan[:,10])/(len_pln*max_rate_plan)
+    norm_cost = np.sum(max_rate_plan - plan[:,10])/(len_pln*diff_rate)
     cost = np.mean([chebi_cost,norm_cost])
     
     return cost
@@ -166,18 +171,16 @@ def fitness(individual, meta_data):
 #    print('cost_cnt: '+str(cost_cnt))
 #    print('cost_diff_rqTime: '+str(cost_diff_rqTime))   
     cost =((coh_fultm*cost_fultm) + 
-           (coh_lntm*cost_lntm) + 
-           (coh_cnt*cost_cnt) + 
-           (coh_dffRqTime*cost_rq_time)+
-           (coh_dffVisTime*cost_vis_time)+
-           (coh_rate*cost_rte)
-           )    
+               (coh_lntm*cost_lntm) + 
+               (coh_cnt*cost_cnt) + 
+               (coh_dffRqTime*cost_rq_time)+
+               (coh_dffVisTime*cost_vis_time)               
+              )    
 #    print(cost)
-#    msk = np.isin(const[:,0], individual[:,0])
-#    notUsed_const = const[~msk]
-#    penalty = np.sum(notUsed_const[:,1]) / tot_lenTimeConst   
+
+    penalty = (coh_rate*cost_rte)/days
     
-    return cost #*(1 + (coh_pnlty*penalty))
+    return cost *(1 + (coh_pnlty*penalty))
 
 ###############################################################################
 '''                             connection config                           '''
@@ -197,12 +200,12 @@ engine = create_engine('mssql+pyodbc://{}:{}@{}/{}?driver=SQL+Server' \
 ###############################################################################
 '''                             Fetch data from db                          '''
 ###############################################################################
-df = pd.read_sql_query('''SELECT * FROM 
-                          [planning]..plan_attractions WHERE type=0''',
+df_city = pd.read_sql_query('''SELECT * FROM 
+                          [planning]..plan_attraction WHERE type=0
+                          AND city_id = {}'''.format(city),
                        con=engine)
-df = df.drop(['fullTitle', 'address', 'description','image'], axis=1)
+df_city = df_city.drop(['fullTitle', 'address', 'description','image'], axis=1)
 
-df_city = df[df['city_id']==city]
 df_city['rate'] = (df_city['like_no']*60) + (df_city['view_no']*40)
 
 dist_mat_query = ''' SELECT 
@@ -213,7 +216,7 @@ dist_mat_query = ''' SELECT
                        plan_distance_mat
                      WHERE
                        origin_id in 
-                       (SELECT id FROM plan_attractions
+                       (SELECT id FROM plan_attraction
                         WHERE city_id = {0} AND type=0)
                        '''.format(city)
 ###############################################################################
@@ -230,7 +233,7 @@ dist_mat = pd.pivot_table(dist_df,
                           aggfunc=np.sum)
 ######################''' Create Costraints '''################################             
                                         
-const_df = pd.read_sql_query('SELECT * FROM plan_attractions WHERE type>0',
+const_df = pd.read_sql_query('SELECT * FROM plan_attraction WHERE type>0',
                              con=engine)
 
 vst_time_from = np.array(const_df['vis_time_from'])
@@ -388,6 +391,7 @@ for day in range(1,days+1):
     									   "cost_lengthTime",
     									   "cost_countPoints",
     									   "cost_minRqTime",
+                                           "cost_rate",
     									   start_time,
     									   end_time,
     									   dist_len,
@@ -398,13 +402,13 @@ for day in range(1,days+1):
                                            day)
                      values ({0}, {1}, 
                              {2}, {3}, {4}, {5},
-                             {6}, {7}, {8}, {9}, 
-                             {10}, {11},
-                             {12}, {13}, {14}, 
-                             {15}, {16}, {17}) 
+                             {6}, {7}, {8}, {9},{10},
+                             {11}, {12},
+                             {13}, {14}, {15}, 
+                             {16}, {17}, {18}) 
                    '''.format(city, "'"+str(present_id)+"'",
                               coh_fultm, coh_lntm, coh_cnt, coh_dffRqTime, 
-                              cost_fultm, cost_lntm, cost_cnt, cost_rq_time,
+                              cost_fultm, cost_lntm, cost_cnt, cost_rq_time,cost_rte,
                               start_time, end_time,
                               all_dist, len_pln, all_duration,
                               "'"+str(tags)+"'", "'"+str(comment)+"'",

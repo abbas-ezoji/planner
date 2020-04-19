@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import (attractions, travelType, distance_mat,
+from .models import (attraction, travelType, distance_mat,
                      country, province, city, plan, plan_details,
                      airport, constraint)
 
 
-class attractionsAdmin(admin.ModelAdmin):
+class attractionAdmin(admin.ModelAdmin):
     # pass
     list_display = ('title' , 'country', 'province', 'city',
                     'latt', 'long', 'rq_time', 'vis_time',)
@@ -47,7 +47,7 @@ class cityAdmin(admin.ModelAdmin):
 
 class planAdmin(admin.ModelAdmin):
     # pass
-    list_display = ('city', 'cost_fullTime', 'cost_lengthTime', 'cost_countPoints', 'cost_minRqTime', 'tags')
+    list_display = ('city', 'cost_fullTime', 'cost_lengthTime', 'cost_countPoints', 'cost_minRqTime','cost_rate', 'tags')
     list_filter = ('city__name', 'tags', 'cost_lengthTime', 'cost_countPoints', 'cost_minRqTime',)
 
 
@@ -72,6 +72,6 @@ admin.site.register(plan_details, plan_detailsAdmin)
 admin.site.register(country, countryAdmin)
 admin.site.register(province, provinceAdmin)
 admin.site.register(city, cityAdmin)
-admin.site.register(attractions, attractionsAdmin)
+admin.site.register(attraction, attractionAdmin)
 admin.site.register(travelType, travelTypeAdmin)
 admin.site.register(distance_mat, distance_matAdmin)

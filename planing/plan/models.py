@@ -63,7 +63,8 @@ class tags(models.Model):
     comments = models.TextField('Comments', null=True, blank=True)
 
     def __str__(self):
-        return self.category.department.title + ' -> ' + self.category.title + ' -> ' + self.title
+        # return self.category.department.title + ' -> ' + self.category.title + ' -> ' + self.title
+        return self.title
 
 
 TYPE_CHOISES = (
@@ -75,7 +76,7 @@ TYPE_CHOISES = (
 )
 
 
-class attractions(models.Model):
+class attraction(models.Model):
     country = models.ForeignKey(country, on_delete=models.CASCADE, null=True, blank=True)
     province = models.ForeignKey(province, on_delete=models.CASCADE, null=True, blank=True)
     city = models.ForeignKey(city, on_delete=models.CASCADE, null=True, blank=True)
@@ -98,7 +99,7 @@ class attractions(models.Model):
     image = models.URLField('Image', null=True, blank=True)
 
     def __str__(self):
-        return self.title  + ' - ' + (str((self.like_no*60)+(self.view_no*40)) if self.like_no is not None else '') #+(' -> const' if self.type > 0 else '')
+        return self.title  # + ' - ' + (str((self.like_no*60)+(self.view_no*40)) if self.like_no is not None else '') #+(' -> const' if self.type > 0 else '')
 
     # def save(self, *args, **kwargs):
     #     if not self.id:
@@ -139,8 +140,8 @@ class travelType(models.Model):
 
 
 class distance_mat(models.Model):
-    origin = models.ForeignKey(attractions, related_name='distance_mat', on_delete=models.CASCADE)
-    destination = models.ForeignKey(attractions, related_name='destination', on_delete=models.CASCADE)
+    origin = models.ForeignKey(attraction, related_name='distance_mat', on_delete=models.CASCADE)
+    destination = models.ForeignKey(attraction, related_name='destination', on_delete=models.CASCADE)
     travel_type = models.ForeignKey(travelType, on_delete=models.CASCADE)
     ecl_dist = models.FloatField('Euclidean Distance', null=True, blank=True, )
     len_meter = models.FloatField('Lenght Of Meters', null=True, blank=True)
@@ -202,6 +203,7 @@ class plan(models.Model):
     cost_lengthTime = models.FloatField('Distance length time Cost', null=True, blank=True)
     cost_countPoints = models.FloatField('Count of points Cost', null=True, blank=True)
     cost_minRqTime = models.FloatField('Diff min required Time Cost', null=True, blank=True)
+    cost_rate = models.FloatField('Selection attraction rate Cost', null=True, blank=True)
     start_time = models.CharField('Start Time of Day', max_length=20, null=True, blank=True)
     end_time = models.CharField('End Time of Day', max_length=20, null=True, blank=True)
     dist_len = models.FloatField('Length of distance times', null=True, blank=True)
@@ -220,7 +222,7 @@ class plan(models.Model):
 class plan_details(models.Model):
     plan = models.ForeignKey(plan, on_delete=models.CASCADE)
     order = models.IntegerField()
-    point = models.ForeignKey(attractions, on_delete=models.CASCADE)
+    point = models.ForeignKey(attraction, on_delete=models.CASCADE)
     len_time = models.IntegerField()
     from_time = models.IntegerField(null=True, blank=True)
     dist_to = models.IntegerField(null=True, blank=True)

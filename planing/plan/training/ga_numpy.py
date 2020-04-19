@@ -1,3 +1,9 @@
+###############################################################################
+'''                     Author: Abbas Ezoji
+                     Email: Abbas.ezoji@gmail.com
+'''
+###############################################################################
+
 import copy
 import math
 from operator import attrgetter
