@@ -27,13 +27,12 @@ import datetime
 @permission_classes([AllowAny, ])
 def planView(request):
     # permission_classes = (IsAuthenticated,)
-    plan_id = request.GET['id'] if request.GET['id'] else 0
+    plan_id = request.GET.get('id', 0)
+    city = request.GET.get('city', 0)
+    days = request.GET.get('days', 0)
 
-    query = 'SELECT * FROM plan_plan WHERE id = {}'.format(plan_id)
-    print(query)
-    # with connection.cursor() as cursor:
-    #     villa = cursor.callproc('public.getfoo', [id])
-    #     print('getfoo')
+    query = 'SELECT * FROM [dbo].[plan_GetPlans] ({},{},{})'.format(plan_id, city, days)
+    # print(query)
     plan = models.plan.objects.raw(query)
     serializer = serializers.SerializerPlan(plan, many=True)
 
