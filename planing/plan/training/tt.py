@@ -1,7 +1,6 @@
-import numpy as np
+import math
 
-a = np.array([[1,2,3],[2,3,4]])
-
-z = np.zeros((2,1), dtype=int)
-
-t = np.append(a, z, axis=1)
+life_cycle = 5
+data = []
+for i in range(1,1000):
+    data.append(life_cycle*(1- math.exp(-1/i))+1)

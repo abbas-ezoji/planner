@@ -23,7 +23,7 @@ end_time = 1440
 days = 1
 
 population_size = 50
-generations = 500
+generations = 5000
 
 coh_pnlty = 10
 
@@ -171,11 +171,11 @@ def fitness(individual, meta_data):
 #    print('cost_cnt: '+str(cost_cnt))
 #    print('cost_diff_rqTime: '+str(cost_diff_rqTime))   
     cost =((coh_fultm*cost_fultm) + 
-               (coh_lntm*cost_lntm) + 
-               (coh_cnt*cost_cnt) + 
-               (coh_dffRqTime*cost_rq_time)+
-               (coh_dffVisTime*cost_vis_time)               
-              )    
+           (coh_lntm*cost_lntm) + 
+           (coh_cnt*cost_cnt) + 
+           (coh_dffRqTime*cost_rq_time)+
+           (coh_dffVisTime*cost_vis_time)               
+          )    
 #    print(cost)
 
     penalty = (coh_rate*cost_rte)/days

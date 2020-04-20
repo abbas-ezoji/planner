@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7c27ac87-3ff4-49d7-b75a-84b64a13164d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planing/api/filter/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/api/filter/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/training/ga_numpy.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/ga_numpy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/training/plan.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/plan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/planing/plan/training/tt.py" beforeDir="false" afterPath="$PROJECT_DIR$/planing/plan/training/tt.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587328128787</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="EDIT: api/filter&#10;use table value functions">
+      <created>1587389506274</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1587389506274</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -224,18 +233,19 @@
     <MESSAGE value="EDIT: ga_numpy &#10;coh_eff_chromsom based on life_cycle for prevent crwoding problem&#10;create new generation with last parents and new child together" />
     <MESSAGE value="ADD: api restFul" />
     <MESSAGE value="ADD: api/filter&#10;for complexity filtering query" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: api/filter&#10;for complexity filtering query" />
+    <MESSAGE value="EDIT: api/filter&#10;use table value functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="EDIT: api/filter&#10;use table value functions" />
   </component>
   <component name="WindowStateProjectService">
     <state x="136" y="17" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587388788409">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="136" y="17" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1587388788409" />
-    <state x="69" y="0" width="1271" height="728" key="CommitChangelistDialog2" timestamp="1587328127790">
+    <state x="69" y="0" width="1271" height="728" key="CommitChangelistDialog2" timestamp="1587389505112">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="335" y="0" key="CommitChangelistDialog2/0.0.1364.728@0.0.1364.728" timestamp="1584135132483" />
-    <state x="69" y="0" width="1271" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587328127790" />
+    <state x="69" y="0" width="1271" height="728" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587389505112" />
     <state x="461" y="117" key="FileChooserDialogImpl" timestamp="1587388770821">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -278,11 +288,11 @@
     </state>
     <state x="182" y="5" key="SettingsEditor/0.0.1364.728@0.0.1364.728" timestamp="1584134044937" />
     <state x="182" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1586179322631" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1587328133934">
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2" timestamp="1587389514909">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1364.728@0.0.1364.728" timestamp="1584135139549" />
-    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1587328133934" />
+    <state x="273" y="95" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1587389514909" />
     <state x="377" y="186" key="com.intellij.ide.util.TipDialog" timestamp="1586437884156">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

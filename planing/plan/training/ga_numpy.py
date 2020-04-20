@@ -471,10 +471,15 @@ class Chromosome(object):
         """
         return repr((self.fitness, self.genes))
     def set_fitness(self, fitness, current_generation_count):                
-        coh_eff_chromsom = (self.life_cycle * 
-                            (1- math.exp(-self.life_cycle/current_generation_count)
-                             ))
-        
+        coh_eff_chromsom = (self.life_cycle *
+                            ((1- math.exp(-1/current_generation_count))+1)
+                            
+                            )
+        # c_cycle =  self.life_cycle
+        # c_coh_eff_chromsom = coh_eff_chromsom
+        # c_current_generation_count = current_generation_count
+        # if c_cycle > 1:
+            # c_cycle =  self.life_cycle
         self.fitness = coh_eff_chromsom * fitness
         
         if self.parent_fitness == self.fitness :
