@@ -41,6 +41,11 @@ class ListAttraction(generics.ListCreateAPIView):
     serializer_class = serializers.SerializerAttraction
 
 
+@permission_classes([AllowAny, ])
+class ListPlan_details(generics.ListCreateAPIView):
+    queryset = models.plan_details.objects.all()
+    serializer_class = serializers.SerializerPlan_details
+
 # @permission_classes([AllowAny, ])
 # def getTourPics(request, tour_id):
 #     # Delegate to the view generic and get an HttpResponse.

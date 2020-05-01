@@ -43,3 +43,19 @@ def planView(request):
     serializer = serializers.SerializerPlan(plan, many=True)
 
     return Response(serializer.data)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([AllowAny, ])
+def plan_detailsView(request):
+    # permission_classes = (IsAuthenticated,)
+    present_id = request.GET.get('present_id', '')
+
+    query = '''SELECT * FROM [dbo].[plan_GetPlanDetails] ({})
+            '''.format("'"+str(present_id)+"'")
+    # print(query)
+    plan_details = models.plan_details.objects.raw(query)
+    serializer = serializers.SerializerPlan_details(plan_details, many=True)
+
+    return Response(serializer.data)

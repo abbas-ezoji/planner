@@ -14,5 +14,7 @@ urlpatterns = [
     path('city/<int:pk>/', views.ListCity.as_view()),
     path('attraction/', views.ListAttraction.as_view()),
     path('attraction/<int:pk>/', views.ListAttraction.as_view()),
+    path('plan_details/', views.ListPlan_details.as_view()),
+    path('plan_details/<int:pk>/', views.ListPlan_details.as_view()),
 
 ]

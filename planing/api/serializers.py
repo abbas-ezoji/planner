@@ -33,3 +33,10 @@ class SerializerPlan(serializers.ModelSerializer):
     class Meta:
         model = models.plan
         fields = ['id', 'present_id', 'all_days', 'cost_rate', 'geo_dist']
+
+
+class SerializerPlan_details(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.plan_details
+        fields = '__all__'
