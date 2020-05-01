@@ -20,20 +20,20 @@ from time import gmtime, strftime
 city = 36 
 start_time = 420
 end_time = 1440 
-days = 1
+days = 2
 
 population_size = 50
-generations = 5000
+generations = 300
 
 coh_pnlty = 10
 
 coh_fultm = 0.6
-coh_lntm  = 0.1
-coh_cnt   = 0.05
-coh_dffRqTime  = 0.075
-coh_dffVisTime  = 0.075
+coh_dffRqTime  = 0.2
+coh_dffVisTime  = 0.2
 
-coh_rate = 1
+coh_lntm  = 0.05
+coh_cnt   = 0.05
+coh_rate = 0.9
 
 ###############################################################################
 '''                  Cost calculation functions                             '''
@@ -76,12 +76,13 @@ def cost_rate(individual, meta_data):
     plan = individual
     max_rate = np.max(meta_data[:,10])
     max_rate_plan = np.max(plan[:,10])
-    min_rate_plan = np.min(plan[:,10])
-    diff_rate = max_rate_plan - min_rate_plan
+    min_rate_plan = np.min(meta_data[:,10])
+    diff_range = max_rate - min_rate_plan    
     len_pln = len(plan)
-    chebi_cost = (max_rate - max_rate_plan)/max_rate
-    norm_cost = np.sum(max_rate_plan - plan[:,10])/(len_pln*diff_rate)
-    cost = np.mean([chebi_cost,norm_cost])
+    
+    chebi_cost = (max_rate - max_rate_plan)/diff_range
+    norm_cost = np.sum(max_rate - plan[:,10])/(len_pln*diff_range)
+    cost = np.sum([chebi_cost,norm_cost])
     
     return cost
 
@@ -170,26 +171,27 @@ def fitness(individual, meta_data):
 #    print('cost_lntm: '+str(cost_lntm))
 #    print('cost_cnt: '+str(cost_cnt))
 #    print('cost_diff_rqTime: '+str(cost_diff_rqTime))   
-    cost =((coh_fultm*cost_fultm) + 
-           (coh_lntm*cost_lntm) + 
-           (coh_cnt*cost_cnt) + 
-           (coh_dffRqTime*cost_rq_time)+
-           (coh_dffVisTime*cost_vis_time)               
-          )    
+    cost =(((coh_rate*cost_rte)/days)+
+           (coh_cnt*cost_cnt)+
+           (coh_lntm*cost_lntm))
+           
 #    print(cost)
 
-    penalty = (coh_rate*cost_rte)/days
+    penalty = ((coh_fultm*cost_fultm)+
+               (coh_dffRqTime*cost_rq_time)+
+               (coh_dffVisTime*cost_vis_time)) 
     
     return cost *(1 + (coh_pnlty*penalty))
 
 ###############################################################################
 '''                             connection config                           '''
 ###############################################################################
-USER = 'sa'
-PASSWORD = '1qaz!QAZ'
-HOST = '192.168.1.36\MSSQL2017'
-PORT = '1433'
-NAME = 'planning'
+USER = 'sa' # settings.DATABASES['default']['USER']
+PASSWORD = 'xZCtQxjK3z9A' # settings.DATABASES['default']['PASSWORD']
+HOST = '185.10.72.91,1886' # settings.DATABASES['default']['HOST']
+PORT = '1433' # settings.DATABASES['default']['PORT']
+NAME = 'planning' # settings.DATABASES['default']['NAME']
+
 engine = create_engine('mssql+pyodbc://{}:{}@{}/{}?driver=SQL+Server' \
                        .format(USER,
                                PASSWORD,
@@ -317,16 +319,14 @@ for day in range(1,days+1):
     
                     ###################################################
     '''                  Create sample gene from meta_data                  '''
-                    ###################################################
-    
-    pln_gene1 = meta_data
-    np.random.shuffle(pln_gene1)
+                    ###################################################    
+    np.random.shuffle(meta_data)
     
                     ###################################################
     '''                  Set parameters and Call GA                         '''
                     ###################################################
-    if (day==1):
-        ga = ga(seed_data=pln_gene1,
+    if (day==1): # Definition GA object in first 
+        ga = ga(seed_data=meta_data,
                 meta_data=meta_data,    
                 population_size=population_size,
                 generations=generations,
@@ -399,20 +399,21 @@ for day in range(1,days+1):
     									   duration_len,
     									   tags,
     									   comment,
-                                           day)
+                                           day,
+                                           "all_days")
                      values ({0}, {1}, 
                              {2}, {3}, {4}, {5},
                              {6}, {7}, {8}, {9},{10},
                              {11}, {12},
                              {13}, {14}, {15}, 
-                             {16}, {17}, {18}) 
+                             {16}, {17}, {18},{19}) 
                    '''.format(city, "'"+str(present_id)+"'",
                               coh_fultm, coh_lntm, coh_cnt, coh_dffRqTime, 
                               cost_fultm, cost_lntm, cost_cnt, cost_rq_time,cost_rte,
                               start_time, end_time,
                               all_dist, len_pln, all_duration,
                               "'"+str(tags)+"'", "'"+str(comment)+"'",
-                              day
+                              day, days
                               )
     
     engine.execute(query_plan)               

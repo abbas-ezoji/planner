@@ -99,7 +99,7 @@ class attraction(models.Model):
     image = models.URLField('Image', null=True, blank=True)
 
     def __str__(self):
-        return self.title  # + ' - ' + (str((self.like_no*60)+(self.view_no*40)) if self.like_no is not None else '') #+(' -> const' if self.type > 0 else '')
+        return self.title   + ' - ' + (str((self.like_no*60)+(self.view_no*40)) if self.like_no is not None else '') #+(' -> const' if self.type > 0 else '')
 
     # def save(self, *args, **kwargs):
     #     if not self.id:
@@ -195,6 +195,7 @@ class plan(models.Model):
     city = models.ForeignKey(city, on_delete=models.CASCADE)
     present_id = models.CharField(max_length=1000, null=True, blank=True)
     day = models.IntegerField('Day Of Tour', null=True, blank=True)
+    all_days = models.IntegerField('Total days', null=True, blank=True)
     coh_fullTime = models.FloatField('Coefficient of Fill full time Cost', null=True, blank=True)
     coh_lengthTime = models.FloatField('Coefficient of distance length time Cost', null=True, blank=True)
     coh_countPoints = models.FloatField('Coefficient of count of points Cost', null=True, blank=True)
@@ -211,6 +212,8 @@ class plan(models.Model):
     duration_len = models.FloatField('Length of duration points', null=True, blank=True)
     tags = models.CharField(max_length=1000, null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
+    # first_latt = models.DecimalField('Latitude', null=True, blank=True, max_digits=9, decimal_places=6)
+    # first_long = models.DecimalField('Longitude', null=True, blank=True, max_digits=9, decimal_places=6)
 
     def __str__(self):
         return str(self.day) + ' day ' + self.city.name
@@ -228,7 +231,7 @@ class plan_details(models.Model):
     dist_to = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.plan.city.name
+        return '%d: %s' % (self.order, self.point.title)
 
     class Meta:
         verbose_name_plural = '7.1 Plan details'

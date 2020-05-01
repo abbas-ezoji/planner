@@ -470,16 +470,21 @@ class Chromosome(object):
         """Return initialised Chromosome representation in human readable form.
         """
         return repr((self.fitness, self.genes))
-    def set_fitness(self, fitness, current_generation_count):                
-        coh_eff_chromsom = (self.life_cycle *
-                            ((1- math.exp(-1/current_generation_count))+1)
-                            
+    def set_fitness(self, fitness, generation): 
+        life_cycle = self.life_cycle   
+                  
+        coh_eff_chromsom = (life_cycle 
+                            *
+                            ((1- math.exp(-1/generation))+1)
+
                             )
-        # c_cycle =  self.life_cycle
+        
+        # c_cycle =  life_cycle
         # c_coh_eff_chromsom = coh_eff_chromsom
-        # c_current_generation_count = current_generation_count
+        # c_current_generation_count = generation
         # if c_cycle > 1:
-            # c_cycle =  self.life_cycle
+        #     c_cycle =  self.life_cycle
+            
         self.fitness = coh_eff_chromsom * fitness
         
         if self.parent_fitness == self.fitness :

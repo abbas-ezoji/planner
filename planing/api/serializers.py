@@ -28,6 +28,8 @@ class SerializerAttraction(serializers.ModelSerializer):
 
 
 class SerializerPlan(serializers.ModelSerializer):
+    geo_dist = serializers.FloatField()
+
     class Meta:
         model = models.plan
-        fields = '__all__'
+        fields = ['id', 'present_id', 'all_days', 'cost_rate', 'geo_dist']

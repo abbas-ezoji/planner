@@ -106,9 +106,9 @@ DATABASES = {
     'default': {
         'NAME': 'planning',
         'ENGINE': 'sql_server.pyodbc',
-        'HOST': '192.168.1.36\MSSQL2017',
+        'HOST': '185.10.72.91,1886',
         'USER': 'sa',
-        'PASSWORD': '1qaz!QAZ',
+        'PASSWORD': 'xZCtQxjK3z9A',
 
         'OPTIONS': {
                     'driver': 'SQL Server Native Client 11.0',

@@ -47,15 +47,16 @@ class cityAdmin(admin.ModelAdmin):
 
 class planAdmin(admin.ModelAdmin):
     # pass
-    list_display = ('city', 'cost_fullTime', 'cost_lengthTime', 'cost_countPoints', 'cost_minRqTime','cost_rate', 'tags')
-    list_filter = ('city__name', 'tags', 'cost_lengthTime', 'cost_countPoints', 'cost_minRqTime',)
+    list_display = ('city', 'present_id','cost_fullTime', 'cost_lengthTime', 'cost_countPoints', 'cost_minRqTime','cost_rate', 'tags')
+    list_filter = ('city__name', 'tags', 'all_days','cost_lengthTime', 'cost_countPoints', 'cost_minRqTime',)
 
 
 class plan_detailsAdmin(admin.ModelAdmin):
     pass
     list_display = ('point', 'order', 'from_time', 'len_time', 'dist_to', 'plan',)
     list_filter = ('plan__city__name', 'point__title', 'plan__present_id',
-                   'plan__cost_fullTime', 'plan__cost_lengthTime', 'plan__cost_countPoints', 'plan__cost_minRqTime')
+                   'plan__cost_fullTime', 'plan__cost_lengthTime', 'plan__cost_countPoints', 'plan__cost_minRqTime',
+                   'plan__cost_rate')
 
 
 class airportAdmin(admin.ModelAdmin):

@@ -30,8 +30,14 @@ def planView(request):
     plan_id = request.GET.get('id', 0)
     city = request.GET.get('city', 0)
     days = request.GET.get('days', 0)
+    latt = request.GET.get('latt', 0)
+    long = request.GET.get('long', 0)
 
-    query = 'SELECT * FROM [dbo].[plan_GetPlans] ({},{},{})'.format(plan_id, city, days)
+    query = 'SELECT * FROM [dbo].[plan_GetPlansByRank] ({},{},{},{},{})'.format(plan_id,
+                                                                                city,
+                                                                                days,
+                                                                                latt,
+                                                                                long)
     # print(query)
     plan = models.plan.objects.raw(query)
     serializer = serializers.SerializerPlan(plan, many=True)
