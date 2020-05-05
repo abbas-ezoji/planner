@@ -23,7 +23,7 @@ end_time = 1440
 days = 2
 
 population_size = 50
-generations = 300
+generations = 100
 
 coh_pnlty = 10
 

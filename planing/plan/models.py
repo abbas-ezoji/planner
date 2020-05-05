@@ -6,6 +6,7 @@ class country(models.Model):
     name = models.CharField('Country Name', max_length=100)
     iso3 = models.CharField('IOS3', max_length=10, null=True, blank=True)
     phoneCode = models.CharField('Phone Code', max_length=10, null=True, blank=True)
+    safarzoon_id = models.IntegerField('Id in safarzoon.com', null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -18,6 +19,7 @@ class province(models.Model):
     name = models.CharField('Province Name', max_length=100)
     phoneCode = models.CharField('Phone Code', max_length=10, null=True, blank=True)
     country = models.ForeignKey(country, null=True, blank=True, on_delete=models.CASCADE)
+    safarzoon_id = models.IntegerField('Id in safarzoon.com', null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -32,6 +34,7 @@ class city(models.Model):
     latt = models.DecimalField('Latitude', null=True, blank=True, max_digits=9, decimal_places=6)
     long = models.DecimalField('Longitude', null=True, blank=True, max_digits=9, decimal_places=6)
     province = models.ForeignKey(province, null=True, blank=True, on_delete=models.CASCADE)
+    safarzoon_id = models.IntegerField('Id in safarzoon.com', null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -97,6 +100,7 @@ class attraction(models.Model):
     like_no = models.IntegerField('Likes', default=0, null=True, blank=True)
     view_no = models.IntegerField('Views', default=0, null=True, blank=True)
     image = models.URLField('Image', null=True, blank=True)
+    safarzoon_id = models.IntegerField('Id in safarzoon.com', null=True, blank=True)
 
     def __str__(self):
         return self.title   + ' - ' + (str((self.like_no*60)+(self.view_no*40)) if self.like_no is not None else '') #+(' -> const' if self.type > 0 else '')
