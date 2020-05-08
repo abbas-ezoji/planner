@@ -208,7 +208,7 @@ df_city = pd.read_sql_query('''SELECT * FROM
                        con=engine)
 df_city = df_city.drop(['fullTitle', 'address', 'description','image'], axis=1)
 
-df_city['rate'] = (df_city['like_no']*60) + (df_city['view_no']*40)
+df_city['rate'] = df_city['like_no']
 
 dist_mat_query = ''' SELECT 
                          origin_id as orgin

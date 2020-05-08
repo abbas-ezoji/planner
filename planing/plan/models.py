@@ -150,6 +150,7 @@ class distance_mat(models.Model):
     ecl_dist = models.FloatField('Euclidean Distance', null=True, blank=True, )
     len_meter = models.FloatField('Lenght Of Meters', null=True, blank=True)
     len_time = models.FloatField('Lenght Of Time', null=True, blank=True)
+    rout = models.TextField('Routing Json', null=True, blank=True)
 
     def __str__(self):
         return self.origin.title + ' - ' + self.destination.title
