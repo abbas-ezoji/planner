@@ -22,7 +22,6 @@ class GeneticAlgorithm(object):
     def __init__(self,
                  seed_data,
                  meta_data,
-                 day_count = 1,
                  population_size=50,
                  generations=100,
                  current_generation_count = 0,
@@ -30,13 +29,10 @@ class GeneticAlgorithm(object):
                  mutation_probability=0.2,
                  elitism=True,
                  by_parent=False,
-                 maximise_fitness=True,
-                 initial_elit_prob=0.5,
-                 initial_random_prob=0.5):       
+                 maximise_fitness=False):       
 
         self.seed_data = seed_data
         self.meta_data = meta_data
-        self.day_count = day_count
         self.population_size = population_size
         self.generations = generations
         self.current_generation_count = current_generation_count
@@ -49,10 +45,8 @@ class GeneticAlgorithm(object):
         self.double_count = 0        
         self.mutate_count = 0
         self.add_swap_count = 0
-        self.initial_elit_prob=initial_elit_prob,
-        self.initial_random_prob = initial_random_prob
 
-        self.current_generation = []                
+        self.current_generation = []
         
         def single_crossover(parent_1, parent_2):   
             """This funcvtion create 2 childs by same sizes
@@ -112,25 +106,24 @@ class GeneticAlgorithm(object):
             np.random.shuffle(parent)
         
         def mutate(parent, meta_data):
-            child = parent            
-            rq_time = meta_data[:,1]                                            
+            child = parent
+            rq_time = meta_data[:,1]
             
             row = len(child)
             row_meta = len(meta_data)  
             if row<2:
                 return child
             rowChild = random.randrange(1, row - 1 if row>2 else row)
-            rowMeta = random.randrange(1, row_meta - 1 if row>2 else row)
+            rowMeta = random.randrange(1, row_meta - 1)
             #print(rowt)
             child[rowChild] = meta_data[rowMeta]
-            child[rowChild,1] = np.random.choice(rq_time, size=1)[0]                         
+            child[rowChild,1] = np.random.choice(rq_time, size=1)[0]
             
-            msk = np.isin(meta_data[:,0], child[:,0])
-            points_accpt = meta_data[~msk]
-            points_accpt = points_accpt[points_accpt[:,2]==1]
-            if len(points_accpt)>2:                 
-                child = np.vstack((child, points_accpt))
-                np.random.shuffle(child)
+            # msk = np.isin(meta_data[:,0], child[:,0])
+            # points_accpt = meta_data[~msk]
+            # if len(points_accpt)>2:
+            #     child = np.vstack((child, points_accpt))
+            #     np.random.shuffle(child)
             
             _, child = npi.group_by(child[:,0]).min(child)
                              
@@ -237,7 +230,12 @@ class GeneticAlgorithm(object):
         self.double_crossover_function = double_crossover        
         self.mutate_function = mutate
         self.add_swap_function = add_swap
-        self.selection_function = self.tournament_selection        
+        self.selection_function = self.tournament_selection    
+    
+    def set_data(self, seed_data, meta_data):
+        self.seed_data = seed_data
+        self.meta_data = meta_data
+        
 
     def create_initial_population(self):
         """Create members of the first population randomly.
@@ -485,7 +483,7 @@ class Chromosome(object):
         # if c_cycle > 1:
         #     c_cycle =  self.life_cycle
             
-        self.fitness = coh_eff_chromsom * fitness
+        self.fitness =  coh_eff_chromsom * fitness
         
         if self.parent_fitness == self.fitness :
             self.fitness_const_count += 1

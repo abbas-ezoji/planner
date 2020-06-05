@@ -9,6 +9,8 @@ import numpy_indexed as npi
 import uuid
 import random
 import pyodbc
+import math
+import clustering
 from ga_numpy import GeneticAlgorithm as ga
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import create_engine
@@ -17,23 +19,23 @@ from time import gmtime, strftime
 ###############################################################################
 '''                             parameters                            '''
 ###############################################################################
-city = 36 
+city = 1
 start_time = 420
 end_time = 1440 
 days = 2
 
 population_size = 50
-generations = 100
+generations = 200
 
 coh_pnlty = 10
 
-coh_fultm = 0.6
-coh_dffRqTime  = 0.2
-coh_dffVisTime  = 0.2
+coh_fultm = 0.8
+coh_dffRqTime  = 0.1
+coh_dffVisTime  = 0.1
 
-coh_lntm  = 0.05
+coh_lntm  = 0.4
 coh_cnt   = 0.05
-coh_rate = 0.9
+coh_rate = 0.55
 
 ###############################################################################
 '''                  Cost calculation functions                             '''
@@ -52,7 +54,7 @@ def cost_count(individual, meta_data):
     plan = individual
     len_pln = len(plan)
     len_points = len(meta_data)
-    cost = np.abs(len_accpt_points - len_pln) / len_points
+    cost = np.abs(len_points - len_pln) / len_points
     
     return cost
 
@@ -75,9 +77,10 @@ def cost_diffTime(individual):
 def cost_rate(individual, meta_data):
     plan = individual
     max_rate = np.max(meta_data[:,10])
+    min_rate_plan = np.min(plan[:,10])
     max_rate_plan = np.max(plan[:,10])
-    min_rate_plan = np.min(meta_data[:,10])
-    diff_range = max_rate - min_rate_plan    
+
+    diff_range = max_rate - min_rate_plan
     len_pln = len(plan)
     
     chebi_cost = (max_rate - max_rate_plan)/diff_range
@@ -90,45 +93,50 @@ def cost_rate(individual, meta_data):
 '''               individual General functions                          '''
 ###############################################################################
 def set_const(individual, const):
-    plan = individual
-    for c in const:    
-        msk1 = plan[:,3]>=c[5]    
-        p = plan[msk1]
-        msk2 = p[:,3]<=c[6] 
-        p = p[msk2] if c[6]>0 else p
+    for c in const:
+        msk = np.logical_and(individual[:,3]>=c[5], individual[:,3]<=c[6])        
+        p = individual[msk]
         if len(p)>0:
             min_p = np.min(p[:,3]) 
             p = p[p[:,3]==min_p]
             c[3] = p[0,3]
-            plan[plan[:,3]==p[:,3]] = c
+            # individual[individual[:,3]==p[:,3]] = c
+            individual = np.vstack([individual, c])
+            
+            #print(len(individual))
         else:
-            nearest_dist = np.min(np.abs(plan[:,3] - c[5]))
-            msk = np.abs(plan[:,3] - c[5])==nearest_dist
-            p = plan[msk]
+            nearest_dist = np.min(np.abs(individual[:,3] - c[5]))
+            msk1 = np.abs(individual[:,3] - c[5])==nearest_dist
+            msk2 = individual[:,2]==0
+            p = individual[np.logical_and(msk1,msk2)]
 #            print(p)
             if len(p)>0:
                 min_p = np.min(p[:,3]) 
                 p = p[p[:,3]==min_p]
                 c[3] = p[0,3]
-                plan[plan[:,3]==p[:,3]] = c        
+                # individual[individual[:,3]==p[:,3]] = c
+                individual = np.vstack([individual, c])
+            else:
+                c[3] = c[5]
+                individual = np.vstack([individual, c])
+
+    individual = individual[np.lexsort((-individual[:,2], individual[:,3]))]
         
-    plan = plan[plan[:,3].argsort()]
-        
-    return plan
+    return individual
     
-def calc_starttime(individual):
-    plan = individual 
-    pln_pnt = plan[:,0]
-    for i,dist in enumerate(pln_pnt): 
-        if i==0: 
-            plan[i,3] = start_time  
-        elif plan[i-1,2] == 0 and plan[i,2] == 0: # if last and current type not const
-            plan[i,4] = dist_mat.loc[pln_pnt[i-1], pln_pnt[i]]
-            plan[i,3] = plan[i,4] + plan[i-1,3] + plan[i-1,1]
-        elif plan[i-1,2] > 0 or plan[i,2] > 0:
-            plan[i,3] = plan[i-1,3] + plan[i-1,1]
-           
-    return plan
+def calc_starttime(individual): 
+    pln_pnt = individual[:,0]
+    # individual = individual[np.lexsort((individual[:,3], -individual[:,2]))]
+    for i,dist in enumerate(pln_pnt):
+        if i==0:
+            individual[i,3] = start_time
+        elif individual[i-1,2] == 0 and individual[i,2] == 0: # if last and current type not const
+            individual[i,4] = dist_mat.loc[pln_pnt[i-1], pln_pnt[i]]
+            individual[i,3] = individual[i,4] + individual[i-1,3] + individual[i-1,1]
+        elif individual[i-1,2] > 0 or individual[i,2] > 0:
+            individual[i,3] = individual[i-1,3] + individual[i-1,1]
+    
+    return individual
 
 def apply_visTime(a):
     start = a[3]
@@ -167,11 +175,14 @@ def fitness(individual, meta_data):
     cost_cnt   = cost_count(individual, meta_data)
     cost_vis_time, cost_rq_time = cost_diffTime(individual)
     cost_rte   = cost_rate(individual, meta_data)
-#    print('cost_fultm: '+str(cost_fultm))
-#    print('cost_lntm: '+str(cost_lntm))
-#    print('cost_cnt: '+str(cost_cnt))
-#    print('cost_diff_rqTime: '+str(cost_diff_rqTime))   
-    cost =(((coh_rate*cost_rte)/days)+
+    
+    # print('cost_fultm: '+str(cost_fultm))
+    # print('cost_lntm: '+str(cost_lntm))
+    # print('cost_cnt: '+str(cost_cnt))
+    # print('cost_vis_time: '+str(cost_vis_time))
+    # print('cost_rte: '+str(cost_rte))
+    
+    cost =((coh_rate*cost_rte)+
            (coh_cnt*cost_cnt)+
            (coh_lntm*cost_lntm))
            
@@ -181,6 +192,7 @@ def fitness(individual, meta_data):
                (coh_dffRqTime*cost_rq_time)+
                (coh_dffVisTime*cost_vis_time)) 
     
+    # return cost + penalty
     return cost *(1 + (coh_pnlty*penalty))
 
 ###############################################################################
@@ -202,13 +214,13 @@ engine = create_engine('mssql+pyodbc://{}:{}@{}/{}?driver=SQL+Server' \
 ###############################################################################
 '''                             Fetch data from db                          '''
 ###############################################################################
-df_city = pd.read_sql_query('''SELECT * FROM 
+df_city_total = pd.read_sql_query('''SELECT * FROM 
                           [planning]..plan_attraction WHERE type=0
                           AND city_id = {}'''.format(city),
                        con=engine)
-df_city = df_city.drop(['fullTitle', 'address', 'description','image'], axis=1)
+df_city_total = df_city_total.drop(['fullTitle', 'address', 'description','image'], axis=1)
 
-df_city['rate'] = df_city['like_no']
+df_city_total['rate'] = df_city_total['iplanner_rate']*100
 
 dist_mat_query = ''' SELECT 
                          origin_id as orgin
@@ -261,7 +273,7 @@ const = np.array([points,
                       dtype=int).T
                   
 len_const = len(const) 
-tot_lenTimeConst = np.mean(const[:,1]) * len_const
+tot_lenTimeConst = np.sum(const[:,1]) 
 
 #########''' Create all accepted Points as meta_data '''#######################                         
 plan = []
@@ -274,28 +286,54 @@ time_str = str(train_time.tm_year) + '-' + \
            str(train_time.tm_sec)
            
 present_id = str(city) + '-' + str(days) + '-'  + time_str
+last_plans = []
 
-for day in range(1,days+1):    
+df_city_total = df_city_total.sort_values(by='iplanner_rate', ascending=False)
 
-    # day = 1
-    last_pints = pd.read_sql_query('''SELECT pd.point_id 
-                                    FROM 
-                                        plan_plan p
-                                        JOIN plan_plan_details pd 
-                                        ON pd.plan_id = p."id"
-                                    WHERE p.present_id={}
-                                    '''.format("'"+str(present_id)+"'"),
-                             con=engine)
+
+
+for day in range(1,days+1):
+    if day>1:
+        mask = ~df_city_total['id'].isin(last_plans[:,0])
+        df_city = df_city_total[mask]
+    else:
+        df_city = df_city_total
+        
+    tot_lenTime = end_time - start_time
+    rq_time_mean = np.sum(df_city['rq_time']*df_city['rate']) / np.sum(df_city['rate'])
+    len_points = len(df_city)
+    len_accpt_points = math.floor((tot_lenTime)/rq_time_mean)
+    remainig_days = days - day + 1
+    attr_divide = math.floor(len_points/len_accpt_points)
+    if math.floor(attr_divide/day)>2:
+        n_clusters = math.floor(attr_divide/day)
+    else:
+        n_clusters = 2
+
+    X = np.array(df_city.loc[:,['id', 'iplanner_rate', 'latt', 'long']].values, 
+             dtype=float)
     
-    mask = ~df_city['id'].isin(last_pints['point_id'])
-    df_city = df_city[mask]
+    clustering.plot_2d(X)
+    clustering.plot_3d(X)
+    # n_clusters = days - day + 3
+    random_state = day
+    (cluster_labels, 
+     cluster_centers, 
+     max_cluster, 
+     first_cluster_members) = clustering.kmeans_clsuster(X, n_clusters, 
+                                                       random_state)
+
+    # df_city = df_city.iloc[first_cluster_members,:]
+    df_city = df_city.iloc[:len_accpt_points,:]
+    
+    df_city = df_city.sort_values(by='iplanner_rate', ascending=False)    
     
     points = np.array(df_city['id'])
     len_points = len(points)
     vst_time_from = np.array(df_city['vis_time_from'])
     vst_time_to = np.array(df_city['vis_time_to'])
     rq_time = np.array(df_city['rq_time'])  
-    rate = np.array(df_city['rate'])   
+    rate = np.array(df_city['rate']) 
     rq_time_mean = np.mean(rq_time)
     
     meta_data = np.array([points, 
@@ -309,14 +347,8 @@ for day in range(1,days+1):
                           np.zeros(len_points),     # as diff_rqTime
                           np.zeros(len_points),     # as diff_visTime
                           np.array(rate),           # as rate
-                          ],
-                          dtype=int).T
-    
-    
-    
-    tot_lenTime = end_time - start_time
-    len_accpt_points = (tot_lenTime-tot_lenTimeConst)/rq_time_mean                      
-    
+                          ]).T
+
                     ###################################################
     '''                  Create sample gene from meta_data                  '''
                     ###################################################    
@@ -337,7 +369,8 @@ for day in range(1,days+1):
                 by_parent=False,
                 maximise_fitness=False)	
         ga.fitness_function = fitness
-        
+    else:
+        ga.set_data(seed_data = meta_data, meta_data = meta_data)
     ga.run()   
     
                     ###################################################
@@ -345,9 +378,10 @@ for day in range(1,days+1):
                          other output featurs      '''
                     ###################################################
     sol_fitness, sol_df = ga.best_individual()
+    last_plans = sol_df if day==1 else np.concatenate((last_plans, sol_df), axis = 0)
     
     calc_starttime(sol_df)
-    individual = set_const(sol_df, const)
+    sol_df = set_const(sol_df, const)
     calc_starttime(sol_df)
     
     len_pln = len(sol_df)
@@ -362,7 +396,7 @@ for day in range(1,days+1):
     cost_lntm  = cost_lentime(sol_df, all_dist, all_duration)
     cost_cnt   = cost_count(sol_df, meta_data)
     cost_vis_time, cost_rq_time = cost_diffTime(sol_df)
-    cost_rte   = cost_rate(individual, meta_data)
+    cost_rte   = cost_rate(sol_df, meta_data)
 
     diff_full_time = end_plan - end_time
     
@@ -422,22 +456,22 @@ for day in range(1,days+1):
                                       FROM plan_plan
                                       WHERE present_id = {0} and day = {1}
                                           '''.format( "'"+str(present_id)+"'", day)
-                                         ,con=engine)
+                                          ,con=engine)
     plan_id = int(inserted_plan['id'])
     
     for i, sol in enumerate(sol_df):
         qry = '''insert into 
-                 plan_plan_details(plan_id, 
-                                   "order",
-                                   len_time,                              
-                                   point_id,
-                                   from_time,
-                                   dist_to)
-                 values({0}, {1}, {2}, {3}, {4}, {5})
-                 '''.format(plan_id, i, sol[1], sol[0], sol[3], sol[4])
+                  plan_plan_details(plan_id, 
+                                    "order",
+                                    len_time,                              
+                                    point_id,
+                                    from_time,
+                                    dist_to)
+                  values({0}, {1}, {2}, {3}, {4}, {5})
+                  '''.format(plan_id, i, sol[1], sol[0], sol[3], sol[4])
         engine.execute(qry)    
 
 
-last_gens = ga.last_generation()   
+    last_gens = ga.last_generation()   
 
-last_genes = [gene.get_geneInfo() for gene in last_gens]
+    last_genes = [gene.get_geneInfo() for gene in last_gens]

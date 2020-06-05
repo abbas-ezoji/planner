@@ -8,7 +8,7 @@ class attractionAdmin(admin.ModelAdmin):
     # pass
     list_display = ('title' , 'country', 'province', 'city',
                     'latt', 'long', 'rq_time', 'vis_time',)
-    list_filter = ('country', 'province', 'city', 'tags__title', 'title',)
+    list_filter = ('country', 'province', 'city', 'tags__title', 'title', 'type',)
 
 
 class constraintAdmin(admin.ModelAdmin):

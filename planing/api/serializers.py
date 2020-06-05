@@ -40,3 +40,13 @@ class SerializerPlan_details(serializers.ModelSerializer):
     class Meta:
         model = models.plan_details
         fields = '__all__'
+
+
+class SerializerPlan_details_full(serializers.ModelSerializer):
+    plan_details = SerializerPlan_details()
+    attraction = SerializerAttraction()
+
+    class Meta:
+        model = models.plan_details
+        fields = ('plan_details', 'attraction')
+

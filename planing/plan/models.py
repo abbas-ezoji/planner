@@ -60,6 +60,15 @@ class category(models.Model):
         return self.department.title + ' -> ' + self.title
 
 
+class sub_category(models.Model):
+    category = models.ForeignKey(category, null=True, blank=True, on_delete=models.CASCADE)
+    title = models.CharField('Title', max_length=50, null=True, blank=True)
+    comments = models.TextField('Comments', null=True, blank=True)
+
+    def __str__(self):
+        return self.category.department.title + ' -> ' + self.category.title + ' -> ' + self.title
+
+
 class tags(models.Model):
     category = models.ForeignKey(category, null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField('Tag Title', max_length=50, null=True, blank=True)
@@ -101,10 +110,11 @@ class attraction(models.Model):
     view_no = models.IntegerField('Views', default=0, null=True, blank=True)
     image = models.URLField('Image', null=True, blank=True)
     safarzoon_id = models.IntegerField('Id in safarzoon.com', null=True, blank=True)
+    iplanner_rate = models.FloatField('rate by iplanner', null=True, blank=True)
+    users_rate = models.FloatField('rate by users', null=True, blank=True)
 
     def __str__(self):
-        return self.title   + ' - ' + (str((self.like_no*60)+(self.view_no*40)) if self.like_no is not None else '') #+(' -> const' if self.type > 0 else '')
-
+        return self.title + ' -> ' + str(self.iplanner_rate)
     # def save(self, *args, **kwargs):
     #     if not self.id:
     #         super().save(*args, **kwargs)
@@ -150,7 +160,7 @@ class distance_mat(models.Model):
     ecl_dist = models.FloatField('Euclidean Distance', null=True, blank=True, )
     len_meter = models.FloatField('Lenght Of Meters', null=True, blank=True)
     len_time = models.FloatField('Lenght Of Time', null=True, blank=True)
-    rout = models.TextField('Routing Json', null=True, blank=True)
+    route = models.TextField('Routing Json', null=True, blank=True)
 
     def __str__(self):
         return self.origin.title + ' - ' + self.destination.title
@@ -217,6 +227,7 @@ class plan(models.Model):
     duration_len = models.FloatField('Length of duration points', null=True, blank=True)
     tags = models.CharField(max_length=1000, null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
+
     # first_latt = models.DecimalField('Latitude', null=True, blank=True, max_digits=9, decimal_places=6)
     # first_long = models.DecimalField('Longitude', null=True, blank=True, max_digits=9, decimal_places=6)
 
