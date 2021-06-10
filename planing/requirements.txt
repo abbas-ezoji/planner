@@ -3,7 +3,7 @@ beautifulsoup4==4.8.2
 bs4==0.0.1
 certifi==2019.11.28
 chardet==3.0.4
-Django==2.1.15
+Django==2.2.24
 django-jet==1.0.8
 django-pyodbc-azure==2.1.0.0
 feedparser==5.2.1
